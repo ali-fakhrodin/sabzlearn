@@ -1,0 +1,19 @@
+/* Start Courses Pagination Style */
+
+.courses-pagination-link {
+     width: 4rem;
+     height: 4rem;
+     background-color: #f0f0f1;
+}
+
+.courses-pagination-link:hover {
+     background-color: var(--primary-color);
+     color: var(--white-color);
+}
+
+.courses__pagintaion-link--active {
+     background-color: var(--primary-color);
+     color: var(--white-color);
+}
+
+/* Finish Courses Pagination Style */

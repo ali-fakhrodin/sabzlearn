@@ -1,0 +1,19 @@
+/* Start Breadcrump Style */
+.breadcrumb_content {
+     background-color: #f0f2f7;
+}
+
+.breadcrumb__home-content-icon {
+     display: flex;
+     width: 3.6rem;
+     height: 3.6rem;
+     background-color: var(--white-color);
+     color: #909aa7;
+     font-size: 1.8rem;
+}
+
+.breadcrumb__link {
+     color: #7f8187;
+}
+
+/* Finish Breadcrump Style */

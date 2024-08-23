@@ -1,0 +1,173 @@
+@import './variables.css';
+@import './fonts.css';
+@import './top-bar.css';
+@import './nav-bar.css';
+@import './course-box.css';
+@import './default.css';
+@import './footer.css';
+@import './pagination.css';
+@import './breadcrump.css';
+@import './sidebar-course-box.css';
+
+/* Start Article Styles */
+
+.article {
+     box-shadow: 0 5px 30px rgba(70, 72, 77, 0.08);
+}
+
+.article__title {
+     color: var(--dark-color);
+     border-bottom: 2px solid #f3f3f3;
+}
+
+.article__header-text {
+      color: #8f8f8f;
+}
+
+.article__header-icon {
+     color: #c7c7c7;
+}
+
+.article-read {
+     background-color: #f2f2f2;
+}
+
+.article-read__link:hover {
+     text-decoration: underline;
+}
+
+.article-section {
+     margin-top: 4rem;
+}
+
+.article-section__title {
+     font-size: 2.4rem;
+     color: #008c25;
+}
+
+.article-share__text {
+     color: #7d7e7f;
+}
+
+.article-share__link {
+     color: #7b868a;
+}
+
+.suggestion-articles {
+     background-color: #f0f2f7;
+}
+
+.suggestion-article__right::before,
+.suggestion-article__left::before {
+     content: "قدیمی تر";
+     position: absolute;
+     color: #adb5db;
+     top: -1.5rem;
+}
+.suggestion-article__right::before {
+     left: 2rem;
+     font-weight: bold;
+     font-size: 1.8rem;
+     transform: rotate(180deg);
+}
+
+.suggestion-article__left::before {
+     content: "جدید تر";
+     right: 2rem;
+}
+
+.suggestion-article__link-icon {
+     color: #adb5db;
+}
+/* Finish Article Styles */
+
+/* Start Comment Styles */
+
+.comment__title {
+     color: var(--dark-color);
+}
+
+.comment__content-textaria {
+     border: 1px solid #dcdcdc;
+     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07);
+     height: 20rem;
+}
+
+.comment__content-label {
+     color: #6c757d;
+}
+
+.comment__button {
+     width: 15rem;
+     background-color: var(--primary-color);
+     color: var(--white-color);
+
+}
+/* Start Sidebar Styles */
+.courses-info {
+     top: 1rem;
+}
+
+.course-info__course-price {
+     color: var(--primary-color);
+}
+
+.course-info__courses-title::before {
+     content: "";
+     position: absolute;
+     top: 2rem;
+     right: -0.7rem;
+     width: 2.5rem;
+     height: 4rem;
+     border-top-left-radius: 8px;
+     border-bottom-left-radius: 12px;
+     transform: skewX(-10deg);
+     background-color: var(--primary-color);
+}
+
+.sidebar-articles__item {
+     border-bottom: 1px solid #eeeeee;
+     transition: all 250ms ease;
+}
+
+.sidebar-articles__item:hover {
+     padding-right: 1.5rem !important;
+     background-color: #f8f9fa;
+}
+
+.sidebar-articles__icon {
+     color: #909aa7;
+     font-size: 1.4rem;
+     transition: all 250ms ease;
+}
+
+.sidebar-articles__item:hover .sidebar-articles__icon {
+     color: var(--primary-color);
+}
+
+.sidebar-articles__link {
+     color: var(--dark-color);
+     font-size: 1.3rem;
+     transition: all 250ms ease;
+}
+
+.last-articles__item {
+     border-bottom: 1px solid #eeeeee;
+}
+
+.last-articles__link {
+     font-size: 1.4rem;
+}
+
+/* Finish Sidebar Styles */
+
+
+/* Start Helper */
+
+.paragraph {
+     font-size: 1.5rem;
+     line-height: 3rem;
+     color: #7d7e7f;
+}
+
+/* Finish Helper */

@@ -1,0 +1,32 @@
+/* Start Helper */
+
+.title {
+     color: #444446;
+     font-size: 2.3rem;
+}
+
+.title::after {
+     content: '';
+     position: absolute;
+     height: 50%;
+     width: 100%;
+     /* max-width: 0rem; */
+     background-color: rgba(43, 206, 86, 0.2);
+     bottom: 0;
+     right: 0;
+     border-radius: 0.4rem;
+}
+
+.title::before {
+     content: '';
+     position: absolute;
+     height: 4.5rem;
+     width: 0.4rem;
+     background-color: var(--primary-color);
+     right: -1rem;
+     top: 20%;
+     transform: rotate(8deg);
+     border-radius: 5rem;
+}
+
+/* Finish Helper */

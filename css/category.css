@@ -1,0 +1,83 @@
+@import './variables.css';
+@import './fonts.css';
+@import './top-bar.css';
+@import './nav-bar.css';
+@import './course-box.css';
+@import './default.css';
+@import './footer.css';
+@import './pagination.css';
+
+/* Start Top-bar Style */
+
+.courses-top-bar__row-btn,
+.courses-top-bar__column-btn {
+     border: 1px solid #e5e5e5;
+     cursor: pointer;
+}
+
+.courses-top-bar__icon--active {
+     color: var(--white-color);
+     background-color: #1e83f0;
+}
+
+.courses-top-bar__selection {
+     cursor: pointer;
+}
+
+.courses-top-bar__selection-title {
+     color: #7d7e7f;
+     height: 3.5rem;
+     width: 22rem;
+     border: 1px solid #e5e5e5;
+     transition: all 300ms ease;
+}
+
+.courses-top-bar__selection-title:hover {
+     color: var(--white-color);
+     background-color: #1e83f0;
+}
+
+.courses-top-bar__selection-list {
+     opacity: 0;
+     visibility: hidden;
+     background-color: var(--white-color);
+     border-radius: 0 0 0.8rem 0.8rem;
+     border-bottom: 0.3rem solid var(--primary-color);
+     z-index: 100;
+     transition: all ease 300ms;
+}
+
+.courses-top-bar__selection:hover .courses-top-bar__selection-list {
+     opacity: 1;
+     visibility: visible;
+}
+
+.courses-top-bar__selection-item {
+     transition: all 200ms ease;
+     padding: 0.8rem 1rem;
+}
+
+.courses-top-bar__selection-item:hover {
+     background-color: #ddd;
+}
+
+.courses-top-bar__selection-item--active {
+     background-color: #ddd;
+}
+
+.courses-top-bar__form {
+     width: 30rem;
+}
+
+.courses-top-bar__input {
+     outline: none;
+     border: 1px solid #dcdcdc;
+}
+
+.courses-top-bar__search-icon {
+     left: 2rem;
+     top: 50%;
+     color: #7d7e7f;
+     cursor: pointer;
+}
+/* Finish Top-bar Style */

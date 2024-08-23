@@ -1,0 +1,19 @@
+/* Start Top-bar Styles */
+
+.top-bar {
+     color: var(--dark-color);
+     padding: 2rem 0;
+     background-color: #f0f2f7;
+}
+
+.top-bar__link {
+     color: var(--dark-color);
+     transition: all ease 300ms;
+}
+
+.top-bar__email-icon,
+.top-bar__phone-icon {
+     color: var(--primary-color);
+}
+
+/* Finish Top-bar Styles */
