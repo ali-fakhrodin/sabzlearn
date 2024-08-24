@@ -200,8 +200,7 @@
 
                <form class="login-form w-100">
                     <div class="login-form__username position-relative">
-                         <input type="text"
-                              class="login-form__username-input w-100 p-3 my-3 fs-4 shadow-sm rounded-3"
+                         <input type="text" class="login-form__username-input w-100 p-3 my-3 fs-4 shadow-sm rounded-3"
                               placeholder="نام کاربری یا آدرس ایمیل">
                          <i class="fas fa-user login-form__username-icon position-absolute translate-middle fs-3"></i>
                     </div>
@@ -210,13 +209,39 @@
                          <input type="password"
                               class="login-form__password-input w-100 p-3 my-3 fs-4 shadow-sm rounded-3"
                               placeholder="رمز عبور">
-                         <i class="fas fa-lock-open login-form__password-icon position-absolute translate-middle fs-3"></i>
+                         <i
+                              class="fas fa-lock-open login-form__password-icon position-absolute translate-middle fs-3"></i>
                     </div>
 
                     <button class="login-form__btn w-100 position-relative border-0 rounded-2 p-3 my-3">
                          <i class="fas fa-sign-out-alt position-absolute end-0 top-50 translate-middle"></i>
                          <span class="login-form__btn-text">ورود</span>
                     </button>
+
+                    <div class="login-form__password-setting d-flex justify-content-between fs-4 align-items-center">
+                         <label for="remember" class="login-form__password-remember d-flex align-items-center gap-2">
+                              <input type="checkbox" id="remember" class="login-form__password-checkbox">
+                              <span class="login-form__password-text">مرا به خاطر داشته باش</span>
+                         </label>
+                         <label for="" class="login-form__password-forget">
+                              <a href="#" class="login-form__password-forget-link">رمز عبور را فراموش کرده اید؟</a>
+                         </label>
+                    </div>
+
+                    <div class="login-desc my-5 fs-5">
+                         <span class="login-desk__title d-block mb-3">سلام کاربر محترم:</span>
+                         <ul class="login-desk-list mx-4">
+                              <li class="login-desk__item">
+                                   لطفا از مرورگر های مطمئن و بروز مانند گوگل کروم و فایرفاکس استفاده کنید.
+                              </li>
+                              <li class="login-desk__item">
+                                   ما هرگز اطلاعات محرمانه شمارا از طریق ایمیل درخواست نمیکنیم.
+                              </li>
+                              <li class="login-desk__item">
+                                   لطفا کلمه عبور خود را در فواصل زمانی کوتاه تغییر دهید.
+                              </li>
+                         </ul>
+                    </div>
                </form>
           </div>
      </section>

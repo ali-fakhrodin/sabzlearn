@@ -47,3 +47,15 @@
      color: var(--white-color);
      background-color: var(--primary-color);
 }
+
+.login-form__password-setting * {
+     color: #6c757d;
+}
+
+.login-desc {
+     color: #7b868a;
+}
+
+.login-desk-list {
+     list-style: disc;
+}
