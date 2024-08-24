@@ -4,7 +4,7 @@
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>ورود</title>
+     <title>ثبت نام</title>
      <!-- Reset -->
      <link rel="stylesheet" href="./css/reset.css">
      <!-- Swiper -->
@@ -182,27 +182,39 @@
      <section class="login-register d-flex justify-content-center position-relative overflow-hidden">
           <div class="login d-flex flex-column align-items-center my-5 p-4 rounded-2">
                <span class="login-title d-block fs-2">
-                    ورود به حساب کاربری
+                    ایجاد حساب کاربری جدید
                </span>
 
                <span class="login-subtitle fs-4 d-block">
-                    خوشحالیم دوباره میبینیمت دوست عزیز :)
+                    به خانواده سبزلرن خوش اومدی
                </span>
 
                <div
                     class="login__new-member my-4 w-100 d-flex align-items-center justify-content-center gap-4 py-4 rounded-3">
                     <span class="login__new-member-text fs-4">
-                         کاربر جدید هستید؟
+                         قبلا ثبت نام کرده بودی؟
                     </span>
-                    <a href="./register.html" class="login__new-member-link p-2 px-3 rounded-3 fs-5">
-                         ثبت نام
+                    <a href="./login.html" class="login__new-member-link p-2 px-3 rounded-3 fs-5">
+                         ورود
                     </a>
                </div>
 
                <form class="login-form w-100">
                     <div class="login-form__username position-relative">
                          <input type="text" class="login-form__username-input w-100 p-3 my-3 fs-4 shadow-sm rounded-3"
-                              placeholder="نام کاربری یا آدرس ایمیل">
+                              placeholder="نام کاربری">
+                         <i class="fas fa-user login-form__username-icon position-absolute translate-middle fs-3"></i>
+                    </div>
+                    
+                    <div class="login-form__username position-relative">
+                         <input type="text" class="login-form__username-input w-100 p-3 my-3 fs-4 shadow-sm rounded-3"
+                              placeholder="آدرس ایمیل">
+                         <i class="fas fa-user login-form__username-icon position-absolute translate-middle fs-3"></i>
+                    </div>
+
+                    <div class="login-form__username position-relative">
+                         <input type="text" class="login-form__username-input w-100 p-3 my-3 fs-4 shadow-sm rounded-3"
+                              placeholder="شماره تماس">
                          <i class="fas fa-user login-form__username-icon position-absolute translate-middle fs-3"></i>
                     </div>
 
@@ -223,9 +235,6 @@
                          <label for="remember" class="login-form__password-remember d-flex align-items-center gap-2">
                               <input type="checkbox" id="remember" class="login-form__password-checkbox">
                               <span class="login-form__password-text">مرا به خاطر داشته باش</span>
-                         </label>
-                         <label for="" class="login-form__password-forget">
-                              <a href="#" class="login-form__password-forget-link">رمز عبور را فراموش کرده اید؟</a>
                          </label>
                     </div>
 
