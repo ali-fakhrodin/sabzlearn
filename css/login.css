@@ -14,7 +14,8 @@
      border-bottom: 5px solid #2dce56;
 }
 
-.login-title {
+.login-title,
+.login-subtitle {
      color: #7b868a;
 }
 
@@ -58,4 +59,25 @@
 
 .login-desk-list {
      list-style: disc;
+}
+
+.login-register::before {
+     content: "";
+     position: absolute;
+     top: -5rem;
+     width: 110%;
+     height: 380px;
+     background-color: #2dce56;
+     z-index: -50;
+     transform: rotate(-4deg);
+}
+
+.login-register::after {
+     content: "";
+     position: absolute;
+     width: 110%;
+     height: 380px;
+     background-color: rgba(43, 206, 86, 0.6);
+     z-index: -60;
+     transform: rotate(-4deg);
 }
