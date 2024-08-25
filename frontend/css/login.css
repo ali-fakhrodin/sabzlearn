@@ -33,8 +33,7 @@
      color: var(--white-color);
 }
 
-.login-form__username-input,
-.login-form__password-input {
+.login-form__input {
      border: 1px solid #e6e6e6;
 }
 
