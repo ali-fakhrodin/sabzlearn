@@ -21,7 +21,36 @@ const register = () => {
           url: 'http://localhost:4000/v1/auth/register',
           data: newUserInfos
      })
-          .then((res) => console.log(res.data))
+          .then((res) => {
+               console.log(res.data)
+
+               if (res.status === 201) {
+                    Swal.fire({
+                         title: 'شما با موفقیت ثبت نام شدید',
+                         text: 'به سایت ما خوش اومدی',
+                         icon: 'success',
+                         showConfirmButton: false,
+                         confirmButtonText: 'حله',
+                         position: "top-end",
+                         timer: 1200,
+                         timerProgressBar: true,
+                    }).then (() => {
+                         location.href = 'index.html'
+                    })
+               }
+          })
+          .catch(err => {
+               console.log(err);
+
+               if (err.status === 409) {
+                    Swal.fire({
+                         title: 'نام کاربری یا ایمیل، قبلا استفاده شده',
+                         icon: 'error',
+                         confirmButtonText: 'اصلاح کن',
+                         position: "top-end",
+                    })
+               }
+          })
 }
 
 export { register };
