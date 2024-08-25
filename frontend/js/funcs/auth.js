@@ -1,3 +1,5 @@
+import { saveToLocalStorage } from "./utils.js"
+
 const $ = document
 
 const register = () => {
@@ -34,10 +36,14 @@ const register = () => {
                          position: "top-end",
                          timer: 1200,
                          timerProgressBar: true,
-                    }).then (() => {
+                    }).then(() => {
                          location.href = 'index.html'
                     })
                }
+               return res
+          })
+          .then (result => {
+               saveToLocalStorage('user', { token: result.data.accessToken })               
           })
           .catch(err => {
                console.log(err);
