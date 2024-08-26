@@ -170,7 +170,6 @@
                               <a href="#"
                                    class="main-header__profile d-flex align-items-center justify-content-center gap-2 rounded-3">
                                    <i class="fas fa-user main-header__user-icon"></i>
-                                   <span class="main-header__profile-text">علی فخرالدین</span>
                               </a>
                          </div>
                     </div>
@@ -201,14 +200,14 @@
 
                <form class="login-form w-100">
                     <div class="login-form__username position-relative">
-                         <input type="text" class="login-form__username-input w-100 p-3 my-3 fs-4 shadow-sm rounded-3"
+                         <input type="text" class="login-form__input login-form__username-input w-100 p-3 my-3 fs-4 shadow-sm rounded-3"
                               placeholder="نام کاربری یا آدرس ایمیل">
                          <i class="fas fa-user login-form__username-icon position-absolute translate-middle fs-3"></i>
                     </div>
 
                     <div class="login-form__password position-relative">
                          <input type="password"
-                              class="login-form__password-input w-100 p-3 my-3 fs-4 shadow-sm rounded-3"
+                              class="login-form__input login-form__password-input w-100 p-3 my-3 fs-4 shadow-sm rounded-3"
                               placeholder="رمز عبور">
                          <i
                               class="fas fa-lock-open login-form__password-icon position-absolute translate-middle fs-3"></i>
@@ -332,7 +331,15 @@
      </footer>
      <!-- Finish Footer -->
 
+     <!-- Axios -->
+     <script src="./vendor/axios/axios.min.js"></script>
+     <!-- Bootstrap -->
      <script src="./vendor/Bootstrap/bootstrap.bundle.min.js"></script>
+     <!-- Swit Alert -->
+     <script src="./vendor/switalert/sweetalert2@11.js"></script>
+     <!-- Custom -->
+     <script src="./js/shared.js" type="module"></script>
+     <script src="./js/login.js" type="module"></script>
 </body>
 
 </html>

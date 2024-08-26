@@ -1,5 +1,5 @@
 const saveToLocalStorage = (key, value) => {
-     return localStorage.setItem(key, JSON.stringify(value))     
+     return localStorage.setItem(key, JSON.stringify(value))
 }
 
 const getFromLocalStorage = (key) => {
@@ -7,7 +7,13 @@ const getFromLocalStorage = (key) => {
 }
 
 const getToken = () => {
-     return JSON.parse(localStorage.getItem('user')).token
+     const userInfos = JSON.parse(localStorage.getItem('user'))
+     return userInfos ? userInfos.token : null;
 }
 
-export { saveToLocalStorage, getFromLocalStorage, getToken }
+const isLogin = () => {
+     const userInfos = localStorage.getItem('user')
+     return userInfos ? true : false
+}
+
+export { saveToLocalStorage, getFromLocalStorage, getToken, isLogin }
