@@ -36,9 +36,16 @@ const renderTopbarMenus = async () => {
                </li>`
      })
 
-     console.log(topbarMenus);
-
      return topbarMenus
 }
 
-export { ShowUserNameInNavbar, renderTopbarMenus }
+const getAndShowAllCourses = async () => {
+
+     const courseContainer = document.querySelector('.courses-content .row')
+     courseContainer.innerHTML = ''
+     const res = axios({ url: 'http://localhost:4000/v1/courses', method: 'get' })
+
+     return res
+}
+
+export { ShowUserNameInNavbar, renderTopbarMenus, getAndShowAllCourses }
