@@ -22,4 +22,23 @@ const ShowUserNameInNavbar = () => {
 
 }
 
-export { ShowUserNameInNavbar }
+const renderTopbarMenus = async () => {
+     const topbarList = document.querySelector('.top-bar__menu')
+     const res = await axios({ url: 'http://localhost:4000/v1/menus/topbar', method: "get" })
+     const topbarMenus = await res.data;
+
+     const shuffledArray = topbarMenus.sort((a, b) => 0.5 - Math.random());
+
+     shuffledArray.slice(0, 6).map(menu => {
+          topbarList.innerHTML +=
+               `<li class="t4p-bar__item">
+                    <a href="${menu.href}" class="top-bar__link">${menu.title}</a>
+               </li>`
+     })
+
+     console.log(topbarMenus);
+
+     return topbarMenus
+}
+
+export { ShowUserNameInNavbar, renderTopbarMenus }
