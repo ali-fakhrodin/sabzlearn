@@ -40,12 +40,21 @@ const renderTopbarMenus = async () => {
 }
 
 const getAndShowAllCourses = async () => {
-
-     const courseContainer = document.querySelector('.courses-content .row')
-     courseContainer.innerHTML = ''
      const res = axios({ url: 'http://localhost:4000/v1/courses', method: 'get' })
 
      return res
 }
 
-export { ShowUserNameInNavbar, renderTopbarMenus, getAndShowAllCourses }
+const getAndShowPopularCourses = async () => {
+     const res = axios({url:`http://localhost:4000/v1/courses/popular`, method: 'get'})
+     
+     return res
+}
+
+const getAndShowPresellCourses = async () => {
+     const res = axios({url:`http://localhost:4000/v1/courses/presell`})
+     
+     return res
+}
+
+export { ShowUserNameInNavbar, renderTopbarMenus, getAndShowAllCourses, getAndShowPopularCourses, getAndShowPresellCourses }
