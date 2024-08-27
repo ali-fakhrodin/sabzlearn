@@ -9,6 +9,10 @@
 
 /* Start Top-bar Style */
 
+.courses-top-bar {
+     box-shadow: 0 0 13px 1px rgba(70, 72, 77, .08) !important;
+}
+
 .courses-top-bar__row-btn,
 .courses-top-bar__column-btn {
      border: 1px solid #e5e5e5;
@@ -27,7 +31,7 @@
 .courses-top-bar__selection-title {
      color: #7d7e7f;
      height: 3.5rem;
-     width: 22rem;
+     width: 28rem;
      border: 1px solid #e5e5e5;
      transition: all 300ms ease;
 }
@@ -80,4 +84,5 @@
      color: #7d7e7f;
      cursor: pointer;
 }
+
 /* Finish Top-bar Style */

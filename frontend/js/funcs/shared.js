@@ -1,7 +1,8 @@
 import { getMe } from "./auth.js"
-import { getUrlParam, isLogin } from "./utils.js"
+import { getUrlParam, isLogin, getToken } from "./utils.js"
 
 const navbarProfileBox = document.querySelector('.main-header__profile')
+
 const ShowUserNameInNavbar = () => {
 
      const isUserLogin = isLogin()
@@ -278,73 +279,231 @@ const getAndShowNavbarMenus = async () => {
                </li>`)
      })
 
-     console.log(res);
      return res
 }
 
 const getAndShowCategoryCourses = async () => {
      const categoryName = getUrlParam('cat')
-     const coursesContainer = document.querySelector('.courses-content .row')
+     // const coursesContainer = document.querySelector('.courses-content .row')
      console.log(categoryName);
 
-     const res = await axios({ url: `http://localhost:4000/v1/courses/category/${categoryName}`, method: 'get' })
+     // const res = await axios({ url: `http://localhost:4000/v1/courses/category/${categoryName}`, method: 'get' })
+     const res = await axios({ url: `http://localhost:4000/v1/courses/` })
 
-     res.data.forEach(course => {
-          coursesContainer.insertAdjacentHTML('beforeend', `
-                    <div class="col-4">
-                              <div class="course-box d-flex flex-xl-column rounded-4 mt-5 overflow-hidden">
-                                   <a href="#">
-                                        <img src="./images/courses/jango.png" alt="fareelancer-image"
-                                             class="course-box__img w-100">
-                                   </a>
+     return res
+}
 
-                                   <div class="course-box__main px-4">
-                                        <a href="#" class="course-box__title d-block pt-4">
-                                             دوره پروژه محور متخصص جنگو
-                                        </a>
+const insertCourseBoxTemplate = (courses, showType, parrent) => {
+     const coursesContainer = document.querySelector('.courses-content .row')
+     coursesContainer.innerHTML = ''
 
-                                        <div
-                                             class="course-box__rating-teacher d-flex justify-content-between align-items-center py-3">
-                                             <div class="course-box__teacher d-flex align-items-center gap-2">
-                                                  <i class="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
-                                                  <a href="#" class="course-box__teacher-link">رضا مدرس</a>
-                                             </div>
-
-                                             <div class="course-box__rating">
-                                                  <img src="./images/svgs/star.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                             </div>
-                                        </div>
-
-                                        <div class="course-box_status d-flex justify-content-between">
-                                             <div class="course-box__user">
-                                                  <i class="fas fa-users course-box__users-icon"></i>
-                                                  <span class="course-box__users-text">2436</span>
-                                             </div>
-                                             <span class="course-box__price">1,720,000</span>
-                                        </div>
+     if (showType === 'row') {
+          courses.forEach(course => {
+               parrent.insertAdjacentHTML('beforeend', `
+                         <div class="col-12">
+                <div class="course-box my-3 rounded-4 overflow-hidden">
+                    <div class="course__box-header d-flex">
+                        <div class="course__box-right">
+                            <a class="course__box-right-link" href="${course.shortName}">
+                                <img src=http://localhost:4000/courses/covers/${course.cover} class="course__box-right-img h-100" style="max-width: 350px;">
+                            </a>
+                        </div>
+                        <div class="course__box-left p-4 d-flex flex-column gap-3">
+                            <div class="course__box-left-top">
+                                <a href="${course.shortName}" class="course__box-left-link fw-bold">${course.name}</a>
+                            </div>
+                            <div class="course__box-left-center d-flex align-items-center justify-content-between">
+                                <div class="course__box-left-teacher">
+                                    <i class="course__box-left-icon fa fa-chalkboard-teacher"></i>
+                                    <span class="course__box-left-name fs-4" style="color: #7d7e7f">${course.creator}</span>
+                                </div>
+                                <div class="course__box-left-stars gap-2">
+                                  ${Array(5 - course.courseAverageScore)
+                         .fill(0)
+                         .map(
+                              (score) =>
+                                   '<img src="images/svgs/star.svg" alt="rating" class="course-box__star">'
+                         )
+                         .join(" ")}
+                                  ${Array(course.courseAverageScore)
+                         .fill(0)
+                         .map(
+                              (score) =>
+                                   '<img src="images/svgs/star_fill.svg" alt="rating" class="course-box__star">'
+                         )
+                         .join(" ")}
+                                </div>
+                            </div>
+                            <div class="course__box-left-bottom">
+                                <div class="course__box-left-des">
+                                    <p>امروزه کتابخانه‌ها کد نویسی را خیلی آسان و لذت بخش تر کرده اند. به قدری
+                                        که
+                                        حتی امروزه هیچ شرکت برنامه نویسی پروژه های خود را با Vanilla Js پیاده
+                                        سازی
+                                        نمی کند و همیشه از کتابخانه ها و فریمورک های موجود استفاده می کند. پس
+                                        شما هم
+                                        اگه میخواید یک برنامه نویس عالی فرانت اند باشید، باید کتابخانه های
+                                        کاربردی
+                                        که در بازار کار استفاده می شوند را به خوبی بلد باشید</p>
+                                </div>
+                            </div>
+                            <div class="course__box-footer d-flex justify-content-between" style="color: #7d7e7f;">
+                                <div class="course__box-footer-right">
+                                    <i class="course__box-footer-icon fa fa-users"></i>
+                                    <span class="course__box-footer-count">${course.registers}</span>
+                                </div>
+                                <span class="course__box-footer-left">${course.price === 0
+                         ? "رایگان"
+                         : course.price.toLocaleString()
+                    }</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    `)
+          })
+     } else {
+          courses.forEach(course => {
+               parrent.insertAdjacentHTML('beforeend', `
+                    <div div class= "col-4" >
+                    <div class="course-box d-flex flex-column rounded-4 mt-5 overflow-hidden">
+                         <a href="./course.html?name=${course.shortName}">
+                              <img src="http://localhost:4000/courses/covers/${course.cover}" alt="fareelancer-image"
+                                   class="course-box__img w-100">
+                         </a>
+     
+                         <div class="course-box__main px-4">
+                              <a href="./course.html?name=${course.shortName}" class="course-box__title d-block pt-4">${course.name}</a>
+     
+                              <div
+                                   class="course-box__rating-teacher d-flex justify-content-between align-items-center py-3">
+                                   <div class="course-box__teacher d-flex align-items-center gap-2">
+                                        <i class="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
+                                        <a href="#" class="course-box__teacher-link">${course.creator}</a>
                                    </div>
-
-                                   <div class="course-box__footer mt-3">
-                                        <a href="#"
-                                             class="course-box__footer-link d-flex align-items-center gap-2 justify-content-center py-3">
-                                             مشاهده اطلاعات
-                                             <i class="fas fa-arrow-left course-box__footer-icon"></i>
-                                        </a>
+     
+                                   <div class="course-box__rating">
+                                        ${Array(5 - course.courseAverageScore)
+                         .fill(0)
+                         .map(
+                              (score) =>
+                                   '<img src="images/svgs/star.svg" alt="rating" class="course-box__star">'
+                         )
+                         .join(" ")}
+                                        ${Array(course.courseAverageScore)
+                         .fill(0)
+                         .map(
+                              (score) =>
+                                   '<img src="images/svgs/star_fill.svg" alt="rating" class="course-box__star">'
+                         )
+                         .join(" ")}
                                    </div>
                               </div>
+     
+                              <div class="course-box_status d-flex justify-content-between">
+                                   <div class="course-box__user">
+                                        <i class="fas fa-users course-box__users-icon"></i>
+                                        <span class="course-box__users-text">${course.registers}</span>
+                                   </div>
+                                   <span class="course-box__price">
+                                        ${course.price === 0
+                         ? "رایگان"
+                         : course.price.toLocaleString()}
+                                   </span >
+                              </div >
+                         </div >
+     
+                         <div class="course-box__footer mt-3">
+                              <a href="#"
+                                   class="course-box__footer-link d-flex align-items-center gap-2 justify-content-center py-3">
+                                   مشاهده اطلاعات
+                                   <i class="fas fa-arrow-left course-box__footer-icon"></i>
+                              </a>
                          </div>
+                    </div >
+                                             </div >
                `)
-     })
-     return res
+          })
+     }
+}
+
+const coursesSorting = (array, fillterMethod) => {
+     let outputArray = []
+
+     switch (fillterMethod) {
+          case 'free': {
+               outputArray = array.filter(course => course.price === 0)
+               break
+          }
+          case 'money': {
+               outputArray = array.filter(course => course.price > 0)
+               break
+          }
+          case 'first': {
+               outputArray = [...array].reverse()
+               break
+          }
+          case 'last': {
+               outputArray = array
+               break
+          }
+          case 'default': {
+               outputArray = array
+               break
+          }
+
+          default: {
+               outputArray = array
+          }
+     }
+
+     return outputArray
+}
+
+const getCourseDetails = () => {
+     const shortName = getUrlParam('name');
+
+     // Select Elems From Dom
+     const $ = document
+     const courseCatElem = $.querySelector('.course-info__link')
+     const courseTitleElem = $.querySelector('.course-info__title')
+     const courseDescElem = $.querySelector('.course-info__desc')
+     const courseregisterInfoElem = $.querySelector('.course-info__register-title')
+     const courseStatusElem = $.querySelector('.course-boxes__box--status')
+     const courseSupportElem = $.querySelector('.course-boxes__box--support')
+     const courseLastUpdataElem = $.querySelector('.course-boxes__box--update')
+
+     console.log(courseTitleElem);
+
+
+     axios({
+          method: 'post',
+          url: `http://localhost:4000/v1/courses/${shortName}`,
+          headers: {
+               Authorization: `Bearer ${getToken()}`
+          }
+     }).then(res => res.data)
+          .then(data => {
+               courseCatElem.innerHTML = data.categoryID.title
+               courseTitleElem.innerHTML = data.name
+               courseDescElem.innerHTML = data.description
+               courseregisterInfoElem.innerHTML = data.isUserRegisteredToThisCours ? 'مشاهده دوره' : 'ثبت نام در دوره'
+               courseStatusElem.innerHTML = data.isComplete ? 'تکمیل شده' : 'در حال برگذاری'
+               courseSupportElem.innerHTML = data.support
+               courseLastUpdataElem.innerHTML = data.updatedAt.slice(0, 10)
+
+               console.log(data);
+          })
+
+
+}
+
+const getSessions = () => {
+
+     const res = axios({ url: `http://localhost:4000/v1/courses/sessions` })
+
+     return res     
 }
 
 export {
@@ -356,4 +515,8 @@ export {
      getAndShowArticles,
      getAndShowNavbarMenus,
      getAndShowCategoryCourses,
+     insertCourseBoxTemplate,
+     coursesSorting,
+     getCourseDetails,
+     getSessions,
 }

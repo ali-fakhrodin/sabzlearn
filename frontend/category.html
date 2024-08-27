@@ -54,7 +54,7 @@
 
                               <ul class="main-header__menu d-flex m-0">
                                    <li class="main-header__item">
-                                        <a href="#" class="main-header__link">صفحه اصلی</a>
+                                        <a href="./index.html" class="main-header__link">صفحه اصلی</a>
                                         <!-- Data Loaded From JS -->
                                    </li>
                               </ul>
@@ -87,11 +87,11 @@
                <div class="courses-top-bar d-flex align-items-center justify-content-between p-5 shadow-sm">
                     <div class="courses-top-bar__right d-flex align-items-center gap-3">
                          <div
-                              class="courses-top-bar__row-btn courses-top-bar__icon--active p-3 d-flex align-items-center justify-content-center rounded-3">
+                              class="courses-top-bar__row-btn courses-top-bar__align-btn courses-top-bar__icon--active p-3 d-flex align-items-center justify-content-center rounded-3">
                               <i class="fas fa-border-all courses-top-bar__icon"></i>
                          </div>
                          <div
-                              class="courses-top-bar__column-btn p-3 d-flex align-items-center justify-content-center rounded-3">
+                              class="courses-top-bar__column-btn courses-top-bar__align-btn p-3 d-flex align-items-center justify-content-center rounded-3">
                               <i class="fas fa-align-left courses-top-bar__icon"></i>
                          </div>
                          <div class="courses-top-bar__selection position-relative">
@@ -102,23 +102,23 @@
                               </span>
                               <ul
                                    class="courses-top-bar__selection-list position-absolute p-0 w-100 d-flex flex-column gap-1 fs-4">
-                                   <li class="courses-top-bar__selection-item courses-top-bar__selection-item--active">
+                                   <li class="courses-top-bar__selection-item courses-top-bar__selection-item--active" data-key="default">
                                         مرتب سازی پیشفرض
                                    </li>
-                                   <li class="courses-top-bar__selection-item">
-                                        مرتب سازی بر اساس محبوبیت
-                                   </li>
-                                   <li class="courses-top-bar__selection-item">
+                                   <li class="courses-top-bar__selection-item" data-key="score">
                                         مرتب سازی بر اساس امتیاز
                                    </li>
-                                   <li class="courses-top-bar__selection-item">
+                                   <li class="courses-top-bar__selection-item" data-key="last">
                                         مرتب سازی بر اساس آخرین
                                    </li>
-                                   <li class="courses-top-bar__selection-item">
-                                        مرتب سازی بر اساس ارزان ترین
+                                   <li class="courses-top-bar__selection-item" data-key="first">
+                                        مرتب سازی بر اساس اولین
                                    </li>
-                                   <li class="courses-top-bar__selection-item">
-                                        مرتب سازی بر اساس گران ترین
+                                   <li class="courses-top-bar__selection-item" data-key="free">
+                                        مرتب سازی بر اساس رایگان
+                                   </li>
+                                   <li class="courses-top-bar__selection-item" data-key="money">
+                                        مرتب سازی بر اساس غیر رایگان
                                    </li>
                               </ul>
                          </div>
@@ -135,265 +135,6 @@
 
                <div class="courses-content">
                     <div class="row">
-                         <div class="col-4">
-                              <div class="course-box d-flex flex-xl-column rounded-4 mt-5 overflow-hidden">
-                                   <a href="#">
-                                        <img src="./images/courses/fareelancer.png" alt="fareelancer-image"
-                                             class="course-box__img w-100">
-                                   </a>
-
-                                   <div class="course-box__main px-4">
-                                        <a href="#" class="course-box__title d-block pt-4">
-                                             دوره پروژه محور متخصص جنگو
-                                        </a>
-
-                                        <div
-                                             class="course-box__rating-teacher d-flex justify-content-between align-items-center py-3">
-                                             <div class="course-box__teacher d-flex align-items-center gap-2">
-                                                  <i class="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
-                                                  <a href="#" class="course-box__teacher-link">رضا مدرس</a>
-                                             </div>
-
-                                             <div class="course-box__rating">
-                                                  <img src="./images/svgs/star.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                             </div>
-                                        </div>
-
-                                        <div class="course-box_status d-flex justify-content-between">
-                                             <div class="course-box__user">
-                                                  <i class="fas fa-users course-box__users-icon"></i>
-                                                  <span class="course-box__users-text">2436</span>
-                                             </div>
-                                             <span class="course-box__price">1,720,000</span>
-                                        </div>
-                                   </div>
-
-                                   <div class="course-box__footer mt-3">
-                                        <a href="#"
-                                             class="course-box__footer-link d-flex align-items-center gap-2 justify-content-center py-3">
-                                             مشاهده اطلاعات
-                                             <i class="fas fa-arrow-left course-box__footer-icon"></i>
-                                        </a>
-                                   </div>
-                              </div>
-                         </div>
-
-                         <div class="col-4">
-                              <div class="course-box d-flex flex-xl-column rounded-4 mt-5 overflow-hidden">
-                                   <a href="#">
-                                        <img src="./images/courses/js_project.png" alt="fareelancer-image"
-                                             class="course-box__img w-100">
-                                   </a>
-
-                                   <div class="course-box__main px-4">
-                                        <a href="#" class="course-box__title d-block pt-4">
-                                             دوره پروژه محور متخصص جنگو
-                                        </a>
-
-                                        <div
-                                             class="course-box__rating-teacher d-flex justify-content-between align-items-center py-3">
-                                             <div class="course-box__teacher d-flex align-items-center gap-2">
-                                                  <i class="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
-                                                  <a href="#" class="course-box__teacher-link">رضا مدرس</a>
-                                             </div>
-
-                                             <div class="course-box__rating">
-                                                  <img src="./images/svgs/star.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                             </div>
-                                        </div>
-
-                                        <div class="course-box_status d-flex justify-content-between">
-                                             <div class="course-box__user">
-                                                  <i class="fas fa-users course-box__users-icon"></i>
-                                                  <span class="course-box__users-text">2436</span>
-                                             </div>
-                                             <span class="course-box__price">1,720,000</span>
-                                        </div>
-                                   </div>
-
-                                   <div class="course-box__footer mt-3">
-                                        <a href="#"
-                                             class="course-box__footer-link d-flex align-items-center gap-2 justify-content-center py-3">
-                                             مشاهده اطلاعات
-                                             <i class="fas fa-arrow-left course-box__footer-icon"></i>
-                                        </a>
-                                   </div>
-                              </div>
-                         </div>
-
-                         <div class="col-4">
-                              <div class="course-box d-flex flex-xl-column rounded-4 mt-5 overflow-hidden">
-                                   <a href="#">
-                                        <img src="./images/courses/nodejs.png" alt="fareelancer-image"
-                                             class="course-box__img w-100">
-                                   </a>
-
-                                   <div class="course-box__main px-4">
-                                        <a href="#" class="course-box__title d-block pt-4">
-                                             دوره پروژه محور متخصص جنگو
-                                        </a>
-
-                                        <div
-                                             class="course-box__rating-teacher d-flex justify-content-between align-items-center py-3">
-                                             <div class="course-box__teacher d-flex align-items-center gap-2">
-                                                  <i class="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
-                                                  <a href="#" class="course-box__teacher-link">رضا مدرس</a>
-                                             </div>
-
-                                             <div class="course-box__rating">
-                                                  <img src="./images/svgs/star.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                             </div>
-                                        </div>
-
-                                        <div class="course-box_status d-flex justify-content-between">
-                                             <div class="course-box__user">
-                                                  <i class="fas fa-users course-box__users-icon"></i>
-                                                  <span class="course-box__users-text">2436</span>
-                                             </div>
-                                             <span class="course-box__price">1,720,000</span>
-                                        </div>
-                                   </div>
-
-                                   <div class="course-box__footer mt-3">
-                                        <a href="#"
-                                             class="course-box__footer-link d-flex align-items-center gap-2 justify-content-center py-3">
-                                             مشاهده اطلاعات
-                                             <i class="fas fa-arrow-left course-box__footer-icon"></i>
-                                        </a>
-                                   </div>
-                              </div>
-                         </div>
-
-                         <div class="col-4">
-                              <div class="course-box d-flex flex-xl-column rounded-4 mt-5 overflow-hidden">
-                                   <a href="#">
-                                        <img src="./images/courses/python.png" alt="fareelancer-image"
-                                             class="course-box__img w-100">
-                                   </a>
-
-                                   <div class="course-box__main px-4">
-                                        <a href="#" class="course-box__title d-block pt-4">
-                                             دوره پروژه محور متخصص جنگو
-                                        </a>
-
-                                        <div
-                                             class="course-box__rating-teacher d-flex justify-content-between align-items-center py-3">
-                                             <div class="course-box__teacher d-flex align-items-center gap-2">
-                                                  <i class="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
-                                                  <a href="#" class="course-box__teacher-link">رضا مدرس</a>
-                                             </div>
-
-                                             <div class="course-box__rating">
-                                                  <img src="./images/svgs/star.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                             </div>
-                                        </div>
-
-                                        <div class="course-box_status d-flex justify-content-between">
-                                             <div class="course-box__user">
-                                                  <i class="fas fa-users course-box__users-icon"></i>
-                                                  <span class="course-box__users-text">2436</span>
-                                             </div>
-                                             <span class="course-box__price">1,720,000</span>
-                                        </div>
-                                   </div>
-
-                                   <div class="course-box__footer mt-3">
-                                        <a href="#"
-                                             class="course-box__footer-link d-flex align-items-center gap-2 justify-content-center py-3">
-                                             مشاهده اطلاعات
-                                             <i class="fas fa-arrow-left course-box__footer-icon"></i>
-                                        </a>
-                                   </div>
-                              </div>
-                         </div>
-
-                         <div class="col-4">
-                              <div class="course-box d-flex flex-xl-column rounded-4 mt-5 overflow-hidden">
-                                   <a href="#">
-                                        <img src="./images/courses/youtuber.png" alt="fareelancer-image"
-                                             class="course-box__img w-100">
-                                   </a>
-
-                                   <div class="course-box__main px-4">
-                                        <a href="#" class="course-box__title d-block pt-4">
-                                             دوره پروژه محور متخصص جنگو
-                                        </a>
-
-                                        <div
-                                             class="course-box__rating-teacher d-flex justify-content-between align-items-center py-3">
-                                             <div class="course-box__teacher d-flex align-items-center gap-2">
-                                                  <i class="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
-                                                  <a href="#" class="course-box__teacher-link">رضا مدرس</a>
-                                             </div>
-
-                                             <div class="course-box__rating">
-                                                  <img src="./images/svgs/star.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                                  <img src="./images/svgs/star_fill.svg" alt="rating"
-                                                       class="course-box__star">
-                                             </div>
-                                        </div>
-
-                                        <div class="course-box_status d-flex justify-content-between">
-                                             <div class="course-box__user">
-                                                  <i class="fas fa-users course-box__users-icon"></i>
-                                                  <span class="course-box__users-text">2436</span>
-                                             </div>
-                                             <span class="course-box__price">1,720,000</span>
-                                        </div>
-                                   </div>
-
-                                   <div class="course-box__footer mt-3">
-                                        <a href="#"
-                                             class="course-box__footer-link d-flex align-items-center gap-2 justify-content-center py-3">
-                                             مشاهده اطلاعات
-                                             <i class="fas fa-arrow-left course-box__footer-icon"></i>
-                                        </a>
-                                   </div>
-                              </div>
-                         </div>
                     </div>
                </div>
 
