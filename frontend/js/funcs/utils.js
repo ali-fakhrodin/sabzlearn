@@ -16,4 +16,9 @@ const isLogin = () => {
      return userInfos ? true : false
 }
 
-export { saveToLocalStorage, getFromLocalStorage, getToken, isLogin }
+const getUrlParam = key => {
+     const urlParams = new URLSearchParams(window.location.search)
+     return urlParams.get(key)
+}
+
+export { saveToLocalStorage, getFromLocalStorage, getToken, isLogin, getUrlParam }

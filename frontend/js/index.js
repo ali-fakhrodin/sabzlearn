@@ -3,7 +3,6 @@ import {
      getAndShowPopularCourses,
      getAndShowPresellCourses,
      getAndShowArticles,
-     getAndShowNavbarMenus,
 } from './funcs/shared.js';
 
 const $ = document
@@ -47,5 +46,4 @@ window.addEventListener('load', () => {
      getAndShowPopularCourses()
      getAndShowPresellCourses()
      getAndShowArticles()               
-     getAndShowNavbarMenus()
 })
