@@ -463,6 +463,8 @@ const coursesSorting = (array, fillterMethod) => {
 
 const getCourseDetails = () => {
      const shortName = getUrlParam('name');
+     let sessionsHTime = 0
+     let sessionsMTime = 0
 
      // Select Elems From Dom
      const $ = document
@@ -472,10 +474,12 @@ const getCourseDetails = () => {
      const courseregisterInfoElem = $.querySelector('.course-info__register-title')
      const courseStatusElem = $.querySelector('.course-boxes__box--status')
      const courseSupportElem = $.querySelector('.course-boxes__box--support')
+     const courseTimeElem = $.querySelector('.course-boxes__box--time')
      const courseLastUpdataElem = $.querySelector('.course-boxes__box--update')
+     const courseStudentsElem = $.querySelector('.course-info__total-sale-number')
+     const courseCommentsElem = $.querySelector('.course-info__total-comment-text')
 
-     console.log(courseTitleElem);
-
+     const accordionContainer = document.querySelector('.accordion-item')
 
      axios({
           method: 'post',
@@ -483,7 +487,8 @@ const getCourseDetails = () => {
           headers: {
                Authorization: `Bearer ${getToken()}`
           }
-     }).then(res => res.data)
+     })
+          .then(res => res.data)
           .then(data => {
                courseCatElem.innerHTML = data.categoryID.title
                courseTitleElem.innerHTML = data.name
@@ -492,18 +497,89 @@ const getCourseDetails = () => {
                courseStatusElem.innerHTML = data.isComplete ? 'تکمیل شده' : 'در حال برگذاری'
                courseSupportElem.innerHTML = data.support
                courseLastUpdataElem.innerHTML = data.updatedAt.slice(0, 10)
+               courseStudentsElem.innerHTML = data.courseStudentsCount
+               courseCommentsElem.innerHTML = ` ${data.comments.length} دیدگاه`
 
-               console.log(data);
+               // console.log(data);
+               return data
           })
 
+          .then(course => {
+               // console.log(course.sessions);
 
-}
+               if (course.sessions.length) {
+                    course.sessions.forEach((session, index) => {
+                         // console.log(session);
 
-const getSessions = () => {
+                         accordionContainer.insertAdjacentHTML('beforeend', `
+                                                       <div id="collapseOne" class="accordion-collapse collapse show"
+                                                            data-bs-parent="#accordionExample">
+                                                            <div
+                                                                 class="accordion-body introduction__accordion-body d-flex justify-content-between align-items-center">
+                                                                 <div
+                                                                      class="introduction__accordion-right d-flex align-items-center gap-3">
+                                                                      <span
+                                                                           class="introduction__accordion-count border border-2 rounded-circle d-flex align-items-center justify-content-center fs-4">${index + 1}</span>
+                                                                      <i
+                                                                           class="fab fa-youtube introduction__accordion-icon"></i>
+                                                                      <a href="#" class="introduction__accordion-link">
+                                                                           ${session.title}
+                                                                      </a>
+                                                                 </div>
+     
+                                                                 <div class="introduction__accordion-left">
+                                                                      <div class="introduction__accordion-time">
+                                                                           ${session.time}
+                                                                      </div>
+                                                                 </div>
+                                                            </div>
+                                                       </div>
+                         `)
 
-     const res = axios({ url: `http://localhost:4000/v1/courses/sessions` })
+                         sessionsMTime += Number(session.time.slice(0, 2))
 
-     return res     
+                         // console.log(sessionsMTime);
+                         // console.log(sessionsHTime);
+                    });
+
+               } else {
+                    accordionContainer.insertAdjacentHTML('beforeend', `
+                 
+                         <div id="collapseOne" class="accordion-collapse collapse show"
+                              data-bs-parent="#accordionExample">
+                              <div
+                                   class="accordion-body introduction__accordion-body d-flex justify-content-between align-items-center">
+                                   <div
+                                        class="introduction__accordion-right d-flex align-items-center gap-3">
+                                        <span
+                                             class="introduction__accordion-count border border-2 rounded-circle d-flex align-items-center justify-content-center fs-4">1</span>
+                                        <i
+                                             class="fab fa-youtube introduction__accordion-icon"></i>
+                                        <a href="#" class="introduction__accordion-link">
+                                             هنوز جلسه ای آپلود نشده                                             
+                                        </a>
+                                   </div>
+                              </div>
+                         </div>
+             
+                    `)
+                    courseTimeElem.innerHTML = 0
+               }
+
+               if (sessionsMTime > 59) {
+                    sessionsHTime += Math.floor(sessionsMTime / 60)
+
+                    sessionsMTime = 0
+               }if (sessionsMTime < 9) {
+                    sessionsMTime = sessionsMTime + '0'
+               } 
+               if (sessionsHTime < 9) {
+                    sessionsHTime = '0' + sessionsHTime
+               }
+
+               courseTimeElem.innerHTML = `${sessionsHTime}:${sessionsMTime}`
+               
+          })
 }
 
 export {
@@ -518,5 +594,5 @@ export {
      insertCourseBoxTemplate,
      coursesSorting,
      getCourseDetails,
-     getSessions,
+     // getSessions,
 }
