@@ -503,14 +503,12 @@ const getCourseDetails = () => {
                // console.log(data);
                return data
           })
-
           .then(course => {
-               // console.log(course.sessions);
+               console.log(course);
 
+               let userRegisterInCourse = course.isUserRegisteredToThisCourse
                if (course.sessions.length) {
                     course.sessions.forEach((session, index) => {
-                         // console.log(session);
-
                          accordionContainer.insertAdjacentHTML('beforeend', `
                                                        <div id="collapseOne" class="accordion-collapse collapse show"
                                                             data-bs-parent="#accordionExample">
@@ -530,6 +528,7 @@ const getCourseDetails = () => {
                                                                  <div class="introduction__accordion-left">
                                                                       <div class="introduction__accordion-time">
                                                                            ${session.time}
+                                                                           ${userRegisterInCourse ? '' : session.free == 0 ? '<i class="fas fa-lock"></i>' : ''}
                                                                       </div>
                                                                  </div>
                                                             </div>
@@ -537,14 +536,10 @@ const getCourseDetails = () => {
                          `)
 
                          sessionsMTime += Number(session.time.slice(0, 2))
-
-                         // console.log(sessionsMTime);
-                         // console.log(sessionsHTime);
                     });
 
                } else {
                     accordionContainer.insertAdjacentHTML('beforeend', `
-                 
                          <div id="collapseOne" class="accordion-collapse collapse show"
                               data-bs-parent="#accordionExample">
                               <div
@@ -570,18 +565,44 @@ const getCourseDetails = () => {
                     sessionsHTime += Math.floor(sessionsMTime / 60)
 
                     sessionsMTime = 0
-               }if (sessionsMTime < 9) {
+               } if (sessionsMTime < 9) {
                     sessionsMTime = sessionsMTime + '0'
-               } 
+               }
                if (sessionsHTime < 9) {
                     sessionsHTime = '0' + sessionsHTime
                }
 
                courseTimeElem.innerHTML = `${sessionsHTime}:${sessionsMTime}`
-               
+
           })
 }
 
+const getAndShowRelatedCourses = () => {
+     let shortName = getUrlParam('name')
+     const relatedCourseWrapper = document.querySelector('.course-info__courses-list')
+
+     axios({ url: `http://localhost:4000/v1/courses/related/${shortName}`, })
+          .then(res => res.data)
+          .then(data => {
+               if (data.length) {
+                    console.log(shortName);
+                    
+                    data.forEach(course => {
+                         console.log(course);
+                         relatedCourseWrapper.insertAdjacentHTML('beforeend', `
+                                             <li class="course-info__courses-list-item">
+                                                  <a href=./course.html?name=${course.shortName} class="course-info__courses-link">
+                                                       <img src="./images/courses/js_project.png"
+                                                            class="course-info__courses-list-img rounded-3"
+                                                            alt="course cover" width="90px">
+                                                       <span class="course-info__courses-text fs-5 fw-bold">${course.name}</span>
+                                                  </a>
+                                             </li>
+                              `)
+                    })
+               } 
+          })
+}
 export {
      ShowUserNameInNavbar,
      renderTopbarMenus,
@@ -594,5 +615,5 @@ export {
      insertCourseBoxTemplate,
      coursesSorting,
      getCourseDetails,
-     // getSessions,
+     getAndShowRelatedCourses,
 }

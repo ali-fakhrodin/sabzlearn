@@ -1,10 +1,6 @@
-import { getCourseDetails } from "./funcs/shared.js";
+import { getCourseDetails, getAndShowRelatedCourses } from "./funcs/shared.js";
 
 window.addEventListener('load', () => {
-
      getCourseDetails()
-     // getSessions()
- 
-
-
+     getAndShowRelatedCourses()
 })
