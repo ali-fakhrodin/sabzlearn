@@ -9,6 +9,7 @@
 @import './footer.css';
 @import './breadcrump.css';
 @import './sidebar-course-box.css';
+@import './comments.css';
 
 /* Start Course Info Style */
 .course-info__link {
