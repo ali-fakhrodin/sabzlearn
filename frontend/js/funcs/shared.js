@@ -304,13 +304,13 @@ const insertCourseBoxTemplate = (courses, showType, parrent) => {
                 <div class="course-box my-3 rounded-4 overflow-hidden">
                     <div class="course__box-header d-flex">
                         <div class="course__box-right">
-                            <a class="course__box-right-link" href="${course.shortName}">
+                            <a class="course__box-right-link" href="./course.html?name=${course.shortName}">
                                 <img src=http://localhost:4000/courses/covers/${course.cover} class="course__box-right-img h-100" style="max-width: 350px;">
                             </a>
                         </div>
                         <div class="course__box-left p-4 d-flex flex-column gap-3">
                             <div class="course__box-left-top">
-                                <a href="${course.shortName}" class="course__box-left-link fw-bold">${course.name}</a>
+                                <a href="./course.html?name=${course.shortName}" class="course__box-left-link fw-bold">${course.name}</a>
                             </div>
                             <div class="course__box-left-center d-flex align-items-center justify-content-between">
                                 <div class="course__box-left-teacher">
@@ -508,6 +508,7 @@ const getCourseDetails = () => {
 
                let userRegisterInCourse = course.isUserRegisteredToThisCourse
                if (course.sessions.length) {
+
                     course.sessions.forEach((session, index) => {
                          accordionContainer.insertAdjacentHTML('beforeend', `
                                                        <div id="collapseOne" class="accordion-collapse collapse show"
@@ -528,7 +529,7 @@ const getCourseDetails = () => {
                                                                  <div class="introduction__accordion-left">
                                                                       <div class="introduction__accordion-time">
                                                                            ${session.time}
-                                                                           ${userRegisterInCourse ? '' : session.free == 0 ? '<i class="fas fa-lock"></i>' : ''}
+                                                                           ${!(userRegisterInCourse || session.free) ? '<i class="fas fa-lock"></i>' : '' }
                                                                       </div>
                                                                  </div>
                                                             </div>
@@ -586,9 +587,8 @@ const getAndShowRelatedCourses = () => {
           .then(data => {
                if (data.length) {
                     console.log(shortName);
-                    
+
                     data.forEach(course => {
-                         console.log(course);
                          relatedCourseWrapper.insertAdjacentHTML('beforeend', `
                                              <li class="course-info__courses-list-item">
                                                   <a href=./course.html?name=${course.shortName} class="course-info__courses-link">
@@ -600,9 +600,10 @@ const getAndShowRelatedCourses = () => {
                                              </li>
                               `)
                     })
-               } 
+               }
           })
 }
+
 export {
      ShowUserNameInNavbar,
      renderTopbarMenus,

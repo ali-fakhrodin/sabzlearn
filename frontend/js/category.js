@@ -3,7 +3,7 @@ import { searchInArray } from "./funcs/utils.js";
 
 let allCourses = null
 const coursesContainer = document.querySelector('.courses-content .row')
-const response = getAndShowCategoryCourses()
+getAndShowCategoryCourses()
      .then(res => allCourses = res.data)
 
 window.addEventListener('load', () => {
@@ -67,7 +67,7 @@ window.addEventListener('load', () => {
                coursesContainer.innerHTML = ''
                coursesContainer.insertAdjacentHTML('beforeend', `<p class="alert alert-danger">هیچ دوره ای برای نمایش وجود ندارد :/</p>`)
           }
-          
+
           console.log(shownCourses);
 
      })
