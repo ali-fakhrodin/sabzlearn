@@ -481,6 +481,10 @@ const getCourseDetails = () => {
 
      const accordionContainer = document.querySelector('.accordion-item')
 
+     const commentsContentWrapper = document.querySelector('.comments__content')
+
+     console.log(commentsContentWrapper);
+
      axios({
           method: 'post',
           url: `http://localhost:4000/v1/courses/${shortName}`,
@@ -500,14 +504,13 @@ const getCourseDetails = () => {
                courseStudentsElem.innerHTML = data.courseStudentsCount
                courseCommentsElem.innerHTML = ` ${data.comments.length} دیدگاه`
 
-               // console.log(data);
                return data
           })
           .then(course => {
-               console.log(course);
                let userRegisterInCourse = course.isUserRegisteredToThisCourse
-               if (course.sessions.length) {
 
+               // Show Sessions
+               if (course.sessions.length) {
                     course.sessions.forEach((session, index) => {
                          accordionContainer.insertAdjacentHTML('beforeend', `
                                                        <div id="collapseOne" class="accordion-collapse collapse show"
@@ -540,10 +543,8 @@ const getCourseDetails = () => {
                                                             </div>
                                                        </div>
                          `)
-
                          sessionsMTime += Number(session.time.slice(0, 2))
                     });
-
                } else {
                     accordionContainer.insertAdjacentHTML('beforeend', `
                          <div id="collapseOne" class="accordion-collapse collapse show"
@@ -567,6 +568,67 @@ const getCourseDetails = () => {
                     courseTimeElem.innerHTML = 0
                }
 
+               // Show Comment
+               if (course.comments.length) {
+                    course.comments.forEach(comment => {
+                         commentsContentWrapper.insertAdjacentHTML('beforeend', `
+                                   <div class="comments__item">
+                                                  <div class="comments__question">
+                                                       <div class="comments__question-header">
+                                                            <div class="comments__question-header-right">
+                                                                 <span class="comments__question-name comment-name">
+                                                                 ${comment.creator.name}</span>
+                                                                 <span class="comments__question-status comment-status">
+                                                                 ( ${comment.creator.role === 'USER' ? ' دانشجو ' : " مدرس "} )</span>
+                                                                 <span
+                                                                      class="comments__question-date comment-date">${comment.createdAt.slice(0, 10)}</span>
+                                                            </div>
+                                                            <div class="comments__question-header-left">
+                                                                 <a class="comments__question-header-link comment-link"
+                                                                      href="#">پاسخ</a>
+                                                            </div>
+                                                       </div>
+                                                       <div class="comments__question-text">
+                                                            <p class="comments__question-paragraph comment-paragraph">
+                                                                 ${comment.body}
+                                                            </p>
+                                                       </div>
+                                                  </div>
+                                                  ${comment.answer ? `
+                                                       <div class="comments__ansewr">
+                                                            <div class="comments__ansewr-header">
+                                                                 <div class="comments__ansewr-header-right">
+                                                                      <span class="comments__ansewr-name comment-name">
+                                                                           ${comment.answerContent.creator.name}
+                                                                      </span>
+                                                                      <span class="comments__ansewr-staus comment-status">
+                                                                      (${comment.answerContent.creator.role === 'USER' ? 'دانشجو' : ' مدرس '})
+                                                                      </span>
+                                                                      <span
+                                                                           class="comments__ansewr-date comment-date">
+                                                                           ${comment.answerContent.createdAt.slice(0, 10)}
+                                                                      </span>
+                                                                 </div>
+                                                                 <div class="comments__ansewr-header-left">
+                                                                      <a class="comments__ansewr-header-link comment-link"
+                                                                           href="#">پاسخ</a>
+                                                                 </div>
+                                                            </div>
+                                                            <div class="comments__ansewr-text">
+                                                                 <p class="comments__ansewr-paragraph comment-paragraph">
+                                                                      ${comment.answerContent.body}
+                                                                 </p>
+                                                            </div>
+                                                       </div>` : ''}
+                                             </div>
+                              `)
+                    })
+               } else {
+                    commentsContentWrapper.insertAdjacentHTML('beforeend', `
+                              <p class="alert alert-danger">هیچ کامنتی برای این دوره ثبت نشده</p>
+                         `)
+               }
+
                if (sessionsMTime > 59) {
                     sessionsHTime += Math.floor(sessionsMTime / 60)
 
@@ -581,6 +643,7 @@ const getCourseDetails = () => {
                courseTimeElem.innerHTML = `${sessionsHTime}:${sessionsMTime}`
 
           })
+
 }
 
 const getAndShowRelatedCourses = () => {
@@ -723,6 +786,7 @@ const submitContancUsMsg = async () => {
 
 
 }
+
 export {
      ShowUserNameInNavbar,
      renderTopbarMenus,
