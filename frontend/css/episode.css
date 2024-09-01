@@ -1,13 +1,13 @@
-@import "./variables.css";
-@import "./fonts.css";
-@import "./top-bar.css";
-@import "./navbar.css";
-@import "./defaults.css";
-@import "./footer.css";
-@import "./course-box.css";
-@import "./helpers.css";
-@import "./breadcrumb.css";
-@import "./sidebarCoursesBox.css";
+@import './variables.css';
+@import './fonts.css';
+@import './top-bar.css';
+@import './nav-bar.css';
+@import './course-box.css';
+@import './default.css';
+@import './pagination.css';
+@import './helper.css';
+@import './footer.css';
+@import './sidebar-course-box.css';
 
 /* ============================== Courses Style ============================== */
 .content {

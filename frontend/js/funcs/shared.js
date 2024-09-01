@@ -505,7 +505,6 @@ const getCourseDetails = () => {
           })
           .then(course => {
                console.log(course);
-
                let userRegisterInCourse = course.isUserRegisteredToThisCourse
                if (course.sessions.length) {
 
@@ -522,7 +521,7 @@ const getCourseDetails = () => {
                                                                       <i
                                                                            class="fab fa-youtube introduction__accordion-icon"></i>
                                                                       ${(session.free || session.isUserRegisteredToThisCours) ? `
-                                                                           <a href="#" class="introduction__accordion-link">
+                                                                           <a href=./episode.html?name=${course.shortName}&id=${session._id} class="introduction__accordion-link">
                                                                                 ${session.title}
                                                                            </a>                                                                           
                                                                            `: `
@@ -610,6 +609,53 @@ const getAndShowRelatedCourses = () => {
           })
 }
 
+const getSessionDetails = async () => {
+     const courseShortName = getUrlParam('name')
+     const sessionID = getUrlParam('id')
+
+     const sessionVideoElem = document.querySelector('.episode-content__video')
+     const courseSessionListElem = document.querySelector('.sidebar-topics__list')
+
+     console.log(sessionVideoElem);
+
+     const res = await axios(`http://localhost:4000/v1/courses/${courseShortName}/${sessionID}`, {
+          headers: {
+               Authorization: `Bearer ${getToken()}`
+          }
+     })
+
+     const result = res.data
+
+     sessionVideoElem.setAttribute('src', `http://localhost:4000/courses/covers/${result.session.video}`)
+     sessionVideoElem.setAttribute('poster', `http://localhost:4000/courses/covers/fareelancer.png`)
+
+     result.sessions.forEach(session => {
+          console.log(session);
+          courseSessionListElem.insertAdjacentHTML('beforeend', `
+               <li class="sidebar-topics__list-item">
+                <div class="sidebar-topics__list-right">
+                  <i class="sidebar-topics__list-item-icon fa fa-play-circle"></i>
+                  ${session.free ? 
+                    `<a class="sidebar-topics__list-item-link" href="./episode.html?name=${courseShortName}&id=${sessionID}">${session.title}</a>`
+                    :
+                    `
+                    <span class="sidebar-topics__list-item-link">${session.title}</span>
+                    `
+                  }
+                </div>
+                <div class="sidebar-topics__list-left">
+                  <span class="sidebar-topics__list-item-time">${session.time}</span>
+                  ${!(session.free) ? `
+                         <i class="fas fa-lock"></i>
+                    `: ''}
+                </div>
+              </li>
+               `)
+     })
+
+     return res
+}
+
 export {
      ShowUserNameInNavbar,
      renderTopbarMenus,
@@ -623,4 +669,5 @@ export {
      coursesSorting,
      getCourseDetails,
      getAndShowRelatedCourses,
+     getSessionDetails,
 }
