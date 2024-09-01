@@ -25,7 +25,6 @@ const register = () => {
      })
           .then((res) => {
                console.log(res.data)
-
                if (res.status === 201) {
                     Swal.fire({
                          title: 'شما با موفقیت ثبت نام شدید',

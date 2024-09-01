@@ -635,13 +635,13 @@ const getSessionDetails = async () => {
                <li class="sidebar-topics__list-item">
                 <div class="sidebar-topics__list-right">
                   <i class="sidebar-topics__list-item-icon fa fa-play-circle"></i>
-                  ${session.free ? 
+                  ${session.free ?
                     `<a class="sidebar-topics__list-item-link" href="./episode.html?name=${courseShortName}&id=${sessionID}">${session.title}</a>`
                     :
                     `
                     <span class="sidebar-topics__list-item-link">${session.title}</span>
                     `
-                  }
+               }
                 </div>
                 <div class="sidebar-topics__list-left">
                   <span class="sidebar-topics__list-item-time">${session.time}</span>
@@ -656,6 +656,73 @@ const getSessionDetails = async () => {
      return res
 }
 
+const submitContancUsMsg = async () => {
+     const nameInputElem = document.querySelector('#name')
+     const emailInputElem = document.querySelector('#email')
+     const telnputElem = document.querySelector('#phone')
+     const bodyInputElem = document.querySelector('#body')
+     console.log(nameInputElem);
+
+     const newContactUsData = {
+          name: nameInputElem.value.trim(),
+          email: emailInputElem.value.trim(),
+          phone: telnputElem.value.trim(),
+          body: bodyInputElem.value.trim(),
+     }
+
+     if (nameInputElem.value && emailInputElem.value && telnputElem.value && bodyInputElem.value) {
+          const res = await axios({
+               url: `http://localhost:4000/v1/contact`,
+               method: 'post',
+               headers: { "Content-Type": "application/json" },
+               data: JSON.stringify(newContactUsData),
+          }).then(res => {
+               res.status === 201
+               console.log('OK');
+               Swal.fire({
+                    title: 'پیام شما ارسال شد',
+                    text: 'ممنون از پیامتون',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    confirmButtonText: 'حله',
+                    position: "top-end",
+                    timer: 2000,
+                    timerProgressBar: true,
+               })
+
+               console.log(res.data);
+
+               return res
+
+          }).catch(err => {
+               Swal.fire({
+                    title: 'پیام شما ارسال نشد',
+                    text: 'لطفاًدوباره امتحان کن',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    confirmButtonText: 'حله',
+                    position: "top-end",
+                    timer: 2000,
+                    timerProgressBar: true,
+               })
+               console.log(err);
+          })
+     } else {
+          console.log('Fill');
+          Swal.fire({
+               title: 'خطا',
+               text: 'لطفاً تمامی ورودی هارو پر کن',
+               icon: 'error',
+               showConfirmButton: false,
+               confirmButtonText: 'حله',
+               position: "top-end",
+               timer: 2000,
+               timerProgressBar: true,
+          })
+     }
+
+
+}
 export {
      ShowUserNameInNavbar,
      renderTopbarMenus,
@@ -670,4 +737,5 @@ export {
      getCourseDetails,
      getAndShowRelatedCourses,
      getSessionDetails,
+     submitContancUsMsg,
 }
