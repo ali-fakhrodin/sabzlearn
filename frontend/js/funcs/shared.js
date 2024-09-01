@@ -521,15 +521,21 @@ const getCourseDetails = () => {
                                                                            class="introduction__accordion-count border border-2 rounded-circle d-flex align-items-center justify-content-center fs-4">${index + 1}</span>
                                                                       <i
                                                                            class="fab fa-youtube introduction__accordion-icon"></i>
-                                                                      <a href="#" class="introduction__accordion-link">
-                                                                           ${session.title}
-                                                                      </a>
+                                                                      ${(session.free || session.isUserRegisteredToThisCours) ? `
+                                                                           <a href="#" class="introduction__accordion-link">
+                                                                                ${session.title}
+                                                                           </a>                                                                           
+                                                                           `: `
+                                                                           <span class="introduction__accordion-link">
+                                                                                ${session.title}
+                                                                           </span>
+                                                                           `}
                                                                  </div>
      
                                                                  <div class="introduction__accordion-left">
                                                                       <div class="introduction__accordion-time">
                                                                            ${session.time}
-                                                                           ${!(userRegisterInCourse || session.free) ? '<i class="fas fa-lock"></i>' : '' }
+                                                                           ${!(userRegisterInCourse || session.free) ? '<i class="fas fa-lock"></i>' : ''}
                                                                       </div>
                                                                  </div>
                                                             </div>
