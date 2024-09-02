@@ -29,11 +29,11 @@ const searchInArray = (array, searchProperty, searchValue) => {
 
 const addParamToUrl = (param, value) => {
      let url = new URL(location.href)
-     let searchParams = url.searchParams     
+     let searchParams = url.searchParams
      searchParams.set(param, value)
      url.search = searchParams.toString()
      location.href = url
-     
+
      console.log(url);
 }
 
@@ -63,4 +63,13 @@ const paginateItems = (array, itemsPerPage, itemsParent, currentPage) => {
      return paginatedItems
 }
 
-export { saveToLocalStorage, getFromLocalStorage, getToken, isLogin, getUrlParam, searchInArray, paginateItems, addParamToUrl }
+export {
+     saveToLocalStorage,
+     getFromLocalStorage,
+     getToken,
+     isLogin,
+     getUrlParam,
+     searchInArray,
+     paginateItems,
+     addParamToUrl,
+}

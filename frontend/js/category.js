@@ -84,11 +84,10 @@ window.addEventListener('load', () => {
                })
 
                // Handle Pagination
-               const currentPage = getUrlParam('page')
-               console.log(currentPage);
-               
+               const currentPage = getUrlParam('page')               
                const coursePaginationWrapper = document.querySelector('.courses-pagination-list')
                const shownCourses = paginateItems([...allCourses], 3, coursePaginationWrapper, currentPage)
+               
                insertCourseBoxTemplate([...shownCourses], showCoursesType, coursesContainer)
           })
 })

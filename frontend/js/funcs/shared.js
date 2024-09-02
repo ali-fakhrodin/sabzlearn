@@ -932,6 +932,13 @@ const addNewComment = async () => {
      console.log(res)
 }
 
+const showAllCoursesInCoursesPage = async () => {
+     const res = await axios({ url: 'http://localhost:4000/v1/courses', method: 'get' })
+     const result = await res.data
+     
+     return result
+}
+
 export {
      ShowUserNameInNavbar,
      renderTopbarMenus,
@@ -949,4 +956,5 @@ export {
      submitContancUsMsg,
      globalSearch,
      addNewComment,
+     showAllCoursesInCoursesPage
 }
