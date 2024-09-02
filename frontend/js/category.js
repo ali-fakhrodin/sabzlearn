@@ -1,10 +1,19 @@
-import { getAndShowCategoryCourses, insertCourseBoxTemplate, coursesSorting } from "./funcs/shared.js";
-import { searchInArray } from "./funcs/utils.js";
+import {
+     getAndShowCategoryCourses,
+     insertCourseBoxTemplate,
+     coursesSorting
+} from "./funcs/shared.js";
 
-let allCourses = null
+import {
+     paginateItems,
+     searchInArray,
+     getUrlParam,
+     addParamToUrl,
+} from "./funcs/utils.js";
+
 const coursesContainer = document.querySelector('.courses-content .row')
-getAndShowCategoryCourses()
-     .then(res => allCourses = res.data)
+
+window.addParamToUrl = addParamToUrl
 
 window.addEventListener('load', () => {
      let showCoursesType = 'col'
@@ -13,63 +22,74 @@ window.addEventListener('load', () => {
      const coursesFilteringTitle = document.querySelector('.courses-top-bar__selection-title')
      const coursesSearchBox = document.querySelector('.courses-top-bar__input')
 
-     // Get And Show All Courses
-     if (allCourses.length) {
-          coursesContainer.innerHTML = ''
-          insertCourseBoxTemplate(allCourses, showCoursesType, coursesContainer)
-     } else {
-          coursesContainer.insertAdjacentHTML('beforeend', `< p class="alert alert-danger" > هنوز هیج دوره ای تو این دسته بندی وجود نداره</ > `)
-     }
-
-     // Show Category Courses Template
-     topbarAlignBtns.forEach(btn => {
-          btn.addEventListener('click', (e) => {
-               coursesContainer.innerHTML = ''
-
-               topbarAlignBtns.forEach(btn => btn.classList.remove('courses-top-bar__icon--active'))
-               btn.classList.add('courses-top-bar__icon--active')
-
-               if (btn.classList.contains('courses-top-bar__row-btn')) {
-                    showCoursesType = 'col'
+     getAndShowCategoryCourses()
+          .then(allCourses => {
+               // Get And Show All Courses
+               if (allCourses.length) {
+                    coursesContainer.innerHTML = ''
                     insertCourseBoxTemplate(allCourses, showCoursesType, coursesContainer)
                } else {
-                    showCoursesType = 'row'
-                    insertCourseBoxTemplate(allCourses, showCoursesType, coursesContainer)
+                    coursesContainer.insertAdjacentHTML('beforeend', `< p class="alert alert-danger" > هنوز هیج دوره ای تو این دسته بندی وجود نداره</ > `)
                }
-          })
-     })
 
-     // Show Courses By User Filtering
-     coursesFilteringSelections.forEach(filterItem => {
-          filterItem.addEventListener('click', (event) => {
-               coursesFilteringSelections.forEach(item => {
-                    item.classList.remove('courses-top-bar__selection-item--active')
+               // Show Category Courses Template
+               topbarAlignBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                         coursesContainer.innerHTML = ''
+
+                         topbarAlignBtns.forEach(btn => btn.classList.remove('courses-top-bar__icon--active'))
+                         btn.classList.add('courses-top-bar__icon--active')
+
+                         if (btn.classList.contains('courses-top-bar__row-btn')) {
+                              showCoursesType = 'col'
+                              insertCourseBoxTemplate(allCourses, showCoursesType, coursesContainer)
+                         } else {
+                              showCoursesType = 'row'
+                              insertCourseBoxTemplate(allCourses, showCoursesType, coursesContainer)
+                         }
+                    })
                })
 
-               filterItem.classList.add('courses-top-bar__selection-item--active')
+               // Show Courses By User Filtering
+               coursesFilteringSelections.forEach(filterItem => {
+                    filterItem.addEventListener('click', (event) => {
+                         coursesFilteringSelections.forEach(item => {
+                              item.classList.remove('courses-top-bar__selection-item--active')
+                         })
 
-               coursesFilteringTitle.innerHTML = `${filterItem.innerHTML} <i class="fas fa-angle-down courses-top-bar__icon"></i>`
+                         filterItem.classList.add('courses-top-bar__selection-item--active')
 
-               let userCustomFilter = filterItem.dataset.key
-               let shownCourses = coursesSorting([...allCourses], userCustomFilter)
+                         coursesFilteringTitle.innerHTML = `${filterItem.innerHTML} <i class="fas fa-angle-down courses-top-bar__icon"></i>`
 
-               insertCourseBoxTemplate(shownCourses, showCoursesType, coursesContainer)
+                         let userCustomFilter = filterItem.dataset.key
+                         let shownCourses = coursesSorting([...allCourses], userCustomFilter)
+
+                         insertCourseBoxTemplate(shownCourses, showCoursesType, coursesContainer)
+                    })
+               })
+
+               // Search In Courses
+               coursesSearchBox.addEventListener('input', (event) => {
+                    const shownCourses = searchInArray(allCourses, 'name', event.target.value)
+
+                    if (shownCourses.length) {
+                         insertCourseBoxTemplate(shownCourses, showCoursesType, coursesContainer)
+                    } else {
+                         coursesContainer.innerHTML = ''
+                         coursesContainer.insertAdjacentHTML('beforeend', `<p class="alert alert-danger">هیچ دوره ای برای نمایش وجود ندارد :/</p>`)
+                    }
+
+                    console.log(shownCourses);
+
+               })
+
+               // Handle Pagination
+               const currentPage = getUrlParam('page')
+               console.log(currentPage);
+               
+               const coursePaginationWrapper = document.querySelector('.courses-pagination-list')
+               const shownCourses = paginateItems([...allCourses], 3, coursePaginationWrapper, currentPage)
+               insertCourseBoxTemplate([...shownCourses], showCoursesType, coursesContainer)
           })
-     })
-
-     // Search In Courses
-     coursesSearchBox.addEventListener('input', (event) => {
-          const shownCourses = searchInArray(allCourses, 'name', event.target.value)
-
-          if (shownCourses.length) {
-               insertCourseBoxTemplate(shownCourses, showCoursesType, coursesContainer)
-          } else {
-               coursesContainer.innerHTML = ''
-               coursesContainer.insertAdjacentHTML('beforeend', `<p class="alert alert-danger">هیچ دوره ای برای نمایش وجود ندارد :/</p>`)
-          }
-
-          console.log(shownCourses);
-
-     })
 })
 

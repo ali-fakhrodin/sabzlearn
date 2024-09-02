@@ -221,11 +221,11 @@ const getAndShowPresellCourses = async () => {
 }
 
 const getAndShowArticles = async () => {
-     const artileContainer = document.querySelector('.article__content .row')
+     const articleContainer = document.querySelector('.article__content .row')
      const res = await axios({ url: `http://localhost:4000/v1/articles` })
 
      res.data.slice(0, 3).forEach(article => {
-          artileContainer.insertAdjacentHTML('beforeend', `
+          articleContainer.insertAdjacentHTML('beforeend', `
                <div class="col-4 my-5">
                          <div class="article-card rounded-4 overflow-hidden pb-4">
                               <div class="article-card__header">
@@ -255,13 +255,13 @@ const getAndShowArticles = async () => {
 }
 
 const getAndShowNavbarMenus = async () => {
-     const artileContainer = document.querySelector('.main-header__menu')
+     const articleContainer = document.querySelector('.main-header__menu')
      const res = await axios({ url: `http://localhost:4000/v1/menus` })
 
      res.data.forEach(item => {
-          artileContainer.insertAdjacentHTML('beforeend',
+          articleContainer.insertAdjacentHTML('beforeend',
                `<li class="main-header__item">
-                    <a href=category.html?cat=${item.href} class="main-header__link">${item.title}</a>
+                    <a href=category.html?cat=${item.href}&page=1 class="main-header__link">${item.title}</a>
 
                     ${item.submenus.length !== 0 ?
                     `<i class="fas fa-angle-down"></i>
@@ -290,7 +290,7 @@ const getAndShowCategoryCourses = async () => {
      // const res = await axios({ url: `http://localhost:4000/v1/courses/category/${categoryName}`, method: 'get' })
      const res = await axios({ url: `http://localhost:4000/v1/courses/` })
 
-     return res
+     return res.data
 }
 
 const insertCourseBoxTemplate = (courses, showType, parrent) => {
@@ -850,7 +850,7 @@ const globalSearch = async () => {
      if (res.data.allResultArticles.length) {
           res.data.allResultArticles.forEach(article => {
                console.log(article);
-               artileContainer.insertAdjacentHTML('beforeend', `
+               articleContainer.insertAdjacentHTML('beforeend', `
                     <div class="col-4 my-5">
                               <div class="article-card rounded-4 overflow-hidden pb-4">
                                    <div class="article-card__header">
