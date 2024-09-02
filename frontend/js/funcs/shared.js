@@ -43,13 +43,13 @@ const getAndShowAllCourses = async () => {
           coursesContainer.insertAdjacentHTML('beforeend',
                `<div class="col-4">
           <div class="course-box d-flex flex-xl-column rounded-4 mt-5 overflow-hidden">
-               <a href="#">
+               <a href="./course.html?name=${course.shortName}">
                     <img src="http://localhost:4000/courses/covers/${course.cover}" alt="fareelancer-image"
                          class="course-box__img w-100">
                </a>
 
                <div class="course-box__main px-4">
-                    <a href="#" class="course-box__title d-block pt-4">
+                    <a href="./course.html?name=${course.shortName}" class="course-box__title d-block pt-4">
                          ${course.name}
                     </a>
                     <div
@@ -787,6 +787,102 @@ const submitContancUsMsg = async () => {
 
 }
 
+const globalSearch = async () => {
+     const searchValue = getUrlParam('search')
+     const coursesSearchResultWrapper = document.querySelector('.courses-content .row')
+     const articleSearchResultWrapper = document.querySelector('.article__content .row')
+
+     console.log(coursesSearchResultWrapper);
+
+     const res = await axios({ url: `http://localhost:4000/v1/search/${searchValue}` })
+
+     // Courses
+     if (res.data.allResultCourses.length) {
+          res.data.allResultCourses.forEach(course => {
+               console.log(course);
+               coursesSearchResultWrapper.insertAdjacentHTML('beforeend',
+                    `<div class="col-4">
+                         <div class="course-box d-flex flex-xl-column rounded-4 mt-5 overflow-hidden">
+                              <a href="./course.html?name=${course.shortName}">
+                                   <img src="http://localhost:4000/courses/covers/${course.cover}" alt="fareelancer-image"
+                                        class="course-box__img w-100">
+                              </a>
+               
+                              <div class="course-box__main px-4">
+                                   <a href="./course.html?name=${course.shortName}" class="course-box__title d-block pt-4">
+                                        ${course.name}
+                                   </a>
+                                   <div
+                                        class="course-box__rating-teacher d-flex justify-content-between align-items-center py-3">
+                                        <div class="course-box__teacher d-flex align-items-center gap-2">
+                                             <i class="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
+                                             <a href="#" class="course-box__teacher-link">محمد امین سعیدی راد</a>
+                                        </div>
+                                        
+                                   </div>
+                                   <div class="course-box_status d-flex justify-content-between">
+                                        <div class="course-box__user">
+                                             <i class="fas fa-users course-box__users-icon"></i>
+                                             <span class="course-box__users-text">${course.registers}</span>
+                                        </div>
+                                        <span class="course-box__price">${course.price ? course.price.toLocaleString() : 'رایگان'}</span>
+                                   </div>
+                                   </div>
+               
+                                   <div class="course-box__footer mt-3">
+                                        <a href="#"
+                                             class="course-box__footer-link d-flex align-items-center gap-2 justify-content-center py-3">
+                                             مشاهده اطلاعات
+                                             <i class="fas fa-arrow-left course-box__footer-icon"></i>
+                                        </a>
+                                   </div>
+                              </div>
+                    </div>`
+               )
+          })
+     } else {
+          coursesSearchResultWrapper.innerHTML = '<p class="alert alert-danger">دوره ای مربوط به سرچ شما وجود ندارد!</p>'
+     }
+
+     // Articles
+     if (res.data.allResultArticles.length) {
+          res.data.allResultArticles.forEach(article => {
+               console.log(article);
+               artileContainer.insertAdjacentHTML('beforeend', `
+                    <div class="col-4 my-5">
+                              <div class="article-card rounded-4 overflow-hidden pb-4">
+                                   <div class="article-card__header">
+                                        <a href="#" class="d-flex justify-content-center">
+                                             <img src="http://localhost:4000/courses/covers/${article.cover}" class="article-card__img w-100"
+                                                  alt="Article-Cover">
+                                        </a>
+                                   </div>
+     
+                                   <div class="article-card__content px-4 pb-2 mt-4">
+                                        <a href="#" class="article-card__link fw-bold fs-3">
+                                             ${article.title}
+                                        </a>
+                                        <p class="article-card__text fs-5">
+                                             ${article.description}
+                                        </p>
+                                        <a class="article-card__btn px-3 py-1 rounded-3 fs-4 d-inline">
+                                             <span>بیشتر بخوانید</span>
+                                        </a>
+                                   </div>
+                              </div>
+                         </div>
+                    `)
+          })
+     } else {
+          articleSearchResultWrapper.innerHTML = '<p class="alert alert-danger">مقاله ای مربوط به سرچ شما وجود ندارد!</p>'
+     }
+
+     console.log(searchValue);
+     console.log(res);
+}
+
+
+
 export {
      ShowUserNameInNavbar,
      renderTopbarMenus,
@@ -802,4 +898,5 @@ export {
      getAndShowRelatedCourses,
      getSessionDetails,
      submitContancUsMsg,
+     globalSearch,
 }

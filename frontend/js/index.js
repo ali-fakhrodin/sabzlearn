@@ -3,6 +3,7 @@ import {
      getAndShowPopularCourses,
      getAndShowPresellCourses,
      getAndShowArticles,
+     globalSearch,
 } from './funcs/shared.js';
 
 const $ = document
@@ -31,6 +32,14 @@ function makeCounter(max, elem, step) {
 }
 
 window.addEventListener('load', () => {
+     const searchBtn = document.querySelector('.landing-searschbar__btn')
+     const globalSearchInp = document.querySelector('.landing-searchbar__input')
+
+     searchBtn.addEventListener('click', () => {
+          location.href = `./search.html?search=${globalSearchInp.value.trim()}`
+          // globalSearch()
+     })
+
      setInterval(() => {
           if (typewriterCounter < landingTitleTypewriterText.length) {
                landingTitle.innerHTML += landingTitleTypewriterText[typewriterCounter]
@@ -45,5 +54,6 @@ window.addEventListener('load', () => {
      getAndShowAllCourses()
      getAndShowPopularCourses()
      getAndShowPresellCourses()
-     getAndShowArticles()               
+     getAndShowArticles()
+
 })
