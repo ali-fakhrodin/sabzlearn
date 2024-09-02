@@ -570,6 +570,8 @@ const getCourseDetails = () => {
 
                // Show Comment
                if (course.comments.length) {
+                    console.log(course.comments);
+
                     course.comments.forEach(comment => {
                          commentsContentWrapper.insertAdjacentHTML('beforeend', `
                                    <div class="comments__item">
@@ -594,7 +596,7 @@ const getCourseDetails = () => {
                                                             </p>
                                                        </div>
                                                   </div>
-                                                  ${comment.answer ? `
+                                                  ${comment.answerContent ? `
                                                        <div class="comments__ansewr">
                                                             <div class="comments__ansewr-header">
                                                                  <div class="comments__ansewr-header-right">
@@ -881,7 +883,54 @@ const globalSearch = async () => {
      console.log(res);
 }
 
+const addNewComment = async () => {
+     const commentTextariaElem = document.querySelector('.comments__score-input-respond')
+     const commentScoreElem = document.querySelector('#comment-score')
+     let score = 5
+     const shortName = getUrlParam('name')
 
+     commentScoreElem.addEventListener('change', event => score = event.target.value)
+
+     const newCommentInfos = {
+          body: commentTextariaElem.value.trim(),
+          courseShortName: shortName,
+          score,
+     }
+
+     if (!commentTextariaElem.value) {
+          Swal.fire({
+               title: "ارسال نشد",
+               text: "دیدگاه خالی است",
+               icon: "error"
+          })
+          return true
+     }
+
+     const res = await axios({
+          url: `http://localhost:4000/v1/comments`,
+          method: 'post',
+          data: JSON.stringify(newCommentInfos),
+          headers: {
+               'Authorization': `Bearer ${getToken()}`,
+               'Content-Type': 'application/json',
+          }
+     })
+
+     if (res.status === 201) {
+          Swal.fire({
+               title: "با موفقیت ارسال شد",
+               text: "ممنون از کامنتی که گذاشتی",
+               icon: "success"
+          })
+     } else {
+          Swal.fire({
+               title: "ارسال نشد",
+               text: "لطفاً دوباره امتحان کن",
+               icon: "error"
+          })
+     }
+     console.log(res)
+}
 
 export {
      ShowUserNameInNavbar,
@@ -899,4 +948,5 @@ export {
      getSessionDetails,
      submitContancUsMsg,
      globalSearch,
+     addNewComment,
 }

@@ -312,7 +312,7 @@
                                                             aria-expanded="true" aria-controls="collapseOne">
                                                             معرفی دوره
                                                        </button>
-                                                  </h2>     
+                                                  </h2>
                                                   <!-- Data Loaded Fropm JS -->
                                              </div>
 
@@ -384,10 +384,15 @@
                                    <div class="comments__respond">
                                         <div class="comments__score">
                                              <span class="comments__score-title">امتیاز شما</span>
-                                             <div class="comments__score-input">
-                                                  <span class="comments__score-input-text">امتیاز خود را انتخاب
-                                                       کنید</span>
-                                                  <i class="fas fa-angle-down	 comments__input-icon"></i>
+                                             <div class="div col-12">
+                                                  <select name="" id="comment-score" class="w-100 border-0 p-2 fs-5">
+                                                       <option value="5">به دوره امتیاز دهید</option>
+                                                       <option value="5">عالی</option>
+                                                       <option value="4">خیلی خوب</option>
+                                                       <option value="3">خوب</option>
+                                                       <option value="2">متوسط</option>
+                                                       <option value="1">بد</option>
+                                                  </select>
                                              </div>
                                         </div>
                                         <div class="comments__respond-content">
@@ -571,6 +576,8 @@
      <script src="./vendor/axios/axios.min.js"></script>
      <!-- Bootstrap -->
      <script src="./vendor/Bootstrap/bootstrap.bundle.min.js"></script>
+     <!-- Swit Alert -->
+     <script src="./vendor/switalert/sweetalert2@11.js"></script>
      <script src="./js/shared.js" type="module"></script>
      <script src="./js/course.js" type="module"></script>
 
