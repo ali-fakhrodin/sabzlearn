@@ -5,8 +5,7 @@ window.seenNotif = seenNotif
 
 const $ = document
 window.addEventListener('load', () => {
-     const adminNameElem = $.querySelector('#admin-welcome-name')
-     const adminWelcomeNameElem = $.querySelector('#admin-name')
+     const adminNameElem = $.querySelector('#admin-name')
      const notifIconElem = $.querySelector('#notifications-icon')
      const notifBoxElem = $.querySelector('.home-notification-modal')
 
@@ -16,7 +15,6 @@ window.addEventListener('load', () => {
 
                if (admin.role === 'ADMIN') {
                     adminNameElem.innerHTML = ` ${admin.name}`
-                    adminWelcomeNameElem.innerHTML = ` ${admin.name}`
                } else {
                     location.replace('../../login.html')
                }
