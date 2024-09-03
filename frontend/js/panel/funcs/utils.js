@@ -1,4 +1,4 @@
-import { getToken } from "../../funcs/utils.js"
+import { getToken } from "../../../js/funcs/utils.js"
 
 const getAdminInfos = async () => {
      const admin = await axios({
@@ -8,5 +8,9 @@ const getAdminInfos = async () => {
           }
      })
 
-     return res
+     return admin.data
+}
+
+export {
+     getAdminInfos,
 }
