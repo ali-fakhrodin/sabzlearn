@@ -3,7 +3,6 @@ import {
      getAndShowPopularCourses,
      getAndShowPresellCourses,
      getAndShowArticles,
-     globalSearch,
 } from './funcs/shared.js';
 
 const $ = document

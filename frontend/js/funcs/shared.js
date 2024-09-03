@@ -9,8 +9,14 @@ const ShowUserNameInNavbar = () => {
 
      if (isLogin()) {
           getMe().then(res => {
-               navbarProfileBox.insertAdjacentHTML('beforeend', `<span class="main-header__profile-text">${res.name}</span>`)
-               navbarProfileBox.setAttribute('href', './index.html')
+               console.log(res);
+               if (res.role === 'ADMIN') {
+                    navbarProfileBox.insertAdjacentHTML('beforeend', `<span class="main-header__profile-text">${res.name}</span>`)
+                    navbarProfileBox.setAttribute('href', './panel/main/')
+               } else {
+                    navbarProfileBox.insertAdjacentHTML('beforeend', `<span class="main-header__profile-text">${res.name}</span>`)
+                    navbarProfileBox.setAttribute('href', './index.html')
+               }
           })
      } else {
           navbarProfileBox.setAttribute('href', './login.html')
@@ -229,14 +235,14 @@ const getAndShowArticles = async () => {
                <div class="col-4 my-5">
                          <div class="article-card rounded-4 overflow-hidden pb-4">
                               <div class="article-card__header">
-                                   <a href="#" class="d-flex justify-content-center">
+                                   <a href="blog.html" class="d-flex justify-content-center">
                                         <img src="http://localhost:4000/courses/covers/${article.cover}" class="article-card__img w-100"
                                              alt="Article-Cover">
                                    </a>
                               </div>
 
                               <div class="article-card__content px-4 pb-2 mt-4">
-                                   <a href="#" class="article-card__link fw-bold fs-3">
+                                   <a href="blog.html" class="article-card__link fw-bold fs-3">
                                         ${article.title}
                                    </a>
                                    <p class="article-card__text fs-5">
@@ -850,7 +856,7 @@ const globalSearch = async () => {
      if (res.data.allResultArticles.length) {
           res.data.allResultArticles.forEach(article => {
                console.log(article);
-               articleContainer.insertAdjacentHTML('beforeend', `
+               articleSearchResultWrapper.insertAdjacentHTML('beforeend', `
                     <div class="col-4 my-5">
                               <div class="article-card rounded-4 overflow-hidden pb-4">
                                    <div class="article-card__header">
@@ -880,7 +886,6 @@ const globalSearch = async () => {
      }
 
      console.log(searchValue);
-     console.log(res);
 }
 
 const addNewComment = async () => {
@@ -935,7 +940,7 @@ const addNewComment = async () => {
 const showAllCoursesInCoursesPage = async () => {
      const res = await axios({ url: 'http://localhost:4000/v1/courses', method: 'get' })
      const result = await res.data
-     
+
      return result
 }
 
