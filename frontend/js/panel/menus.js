@@ -1,10 +1,21 @@
-import { getAndShowAllMenus } from "./funcs/menus.js"
+import { createNewMenu, prepareCreateNewMenu, getAndShowAllMenus, removeMenu } from "./funcs/menus.js"
 
+window.removeMenu = removeMenu
 
 window.addEventListener('load', () => {
-     getAndShowAllMenus().then(data => {
-          
-          console.log(data);
+     const addNewMenuBtn = document.querySelector('#add-new-menu')
+
+     getAndShowAllMenus()
+
+     prepareCreateNewMenu()
+
+     addNewMenuBtn.addEventListener('click', e => {
+          e.preventDefault()
+
+          createNewMenu()
+               .then(() => {
+                    getAndShowAllMenus()
+                    prepareCreateNewMenu()
+               })
      })
-     
 })

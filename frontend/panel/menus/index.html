@@ -108,25 +108,22 @@
                         <div class="col-6">
                             <div class="name input">
                                 <label class="input-title">عنوان</label>
-                                <input type="text" isValid="false" placeholder="لطفا عنوان را وارد کنید...">
+                                <input type="text" isValid="false" id="title" placeholder="لطفا عنوان را وارد کنید...">
                                 <span class="error-message text-danger"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="name input">
-                                <label class="input-title">عنوان</label>
-                                <input type="text" isValid="false" placeholder="لطفا عنوان را وارد کنید...">
+                                <label class="input-title">مقصد</label>
+                                <input type="text" isValid="false" id="href" placeholder="لطفا عنوان را وارد کنید...">
                                 <span class="error-message text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="name input">
-                                <label class="input-title">عنوان</label>
-                                <select class="select">
-                                    <option value="menu">منو</option>
-                                    <option value="menu">منو</option>
-                                    <option value="menu">منو</option>
-                                    <option value="menu">منو</option>
+                                <label class="input-title">پرنت</label>
+                                <select class="select w-100" id="parent-menu-inp">
+                                    <option value="undifind">پرنت را انتخاب کن (اختیاری)</option>
                                 </select>
                                 <!-- <input type="text" isValid="false" placeholder="لطفا عنوان را وارد کنید..."> -->
                                 <span class="error-message text-danger"></span>
@@ -136,7 +133,7 @@
                             <div class="bottom-form">
 
                                 <div class="submit-btn">
-                                    <input type="submit" value="افزودن">
+                                    <input type="submit" id="add-new-menu" value="افزودن">
                                 </div>
                             </div>
                         </div>
