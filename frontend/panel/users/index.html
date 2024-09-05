@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>کاربران سایت</title>
     <link rel="stylesheet" href="vendor/FontAwesome/FontAwesome.min.css">
     <link rel="stylesheet" href="vendor/BootStrap/Bootstrap5.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -25,11 +25,11 @@
             </div>
             <div class="sidebar-menu">
                 <ul>
-                    <li class="active-menu"><a href="#"><span>صفحه اصلی</span></a></li>
-                    <li><a href="#"><span>دوره ها</span></a></li>
-                    <li><a href="#"><span>منو ها</span></a></li>
+                    <li class="active-menu"><a href="../main/index.html"><span>صفحه اصلی</span></a></li>
+                    <li><a href="../courses/index.html"><span>دوره ها</span></a></li>
+                    <li><a href="../menus/index.html"><span>منو ها</span></a></li>
+                    <li><a href="./index.html"><span>کاربران</span></a></li>
                     <li><a href="#"><span>مقاله ها</span></a></li>
-                    <li><a href="#"><span>کاربران</span></a></li>
                     <li><a href="#"><span>کدهای تخفیف</span></a></li>
                     <li><a href="#"><span>دسته‌بندی‌ها</span></a></li>
                 </ul>
@@ -44,7 +44,7 @@
                                 <input type="text" class="search-bar" placeholder="جستجو...">
                             </div>
                             <div class="home-notification">
-                                <button type="button">
+                                <button type="button" id="notifications-icon">
                                     <i class="far fa-bell"></i>
                                 </button>
                             </div>
@@ -80,14 +80,6 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="mode">
-                                <ul class="mode-list">
-                                    <div class="mode-list-item mode-red"></div>
-                                    <div class="mode-list-item mode-blue"></div>
-                                    <div class="mode-list-item mode-dark"></div>
-                                    <div class="mode-list-item mode-light"></div>
-                                </ul>
-                            </div>
                         </div>
                         <div class="home-left">
                             <div class="home-profile">
@@ -97,7 +89,7 @@
                                     </a>
                                 </div>
                                 <div class="home-profile-name">
-                                    <a href="#">احسان خورمهر</a>
+                                    <a href="#" id="admin-name"></a>
                                 </div>
                                 <div class="home-profile-icon">
                                     <i class="fas fa-angle-down"></i>
@@ -119,29 +111,17 @@
                                     <tr>
                                         <th>شناسه</th>
                                         <th>نام</th>
-                                        <th>نام خانوادگی</th>
+                                        <th>نام کاربری</th>
                                         <th>شماره</th>
                                         <th>ایمیل</th>
-                                        <th>رمز عبور</th>
+                                        <th>نقش</th>
                                         <th>ویرایش</th>
                                         <th>حذف</th>
+                                        <th>بن</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>34223</td>
-                                        <td>علی</td>
-                                        <td>سعیدی</td>
-                                        <td>09123443243</td>
-                                        <td>ali@gmail.com</td>
-                                        <td>ehsan1323</td>
-                                        <td>
-                                            <button type='button' class='btn btn-primary edit-btn'>ویرایش</button>
-                                        </td>
-                                        <td>
-                                            <button type='button' class='btn btn-danger delete-btn'>حذف</button>
-                                        </td>
-                                    </tr>
+                                    <!-- Users Data Loaded From JS -->
                                 </tbody>
                             </table>
                         </div>
@@ -233,9 +213,13 @@
         </div>
         <div id="overlay"></div>
     </div>
+    <script src="../../vendor/axios/axios.min.js"></script>
+    <script src="../../vendor/switalert/sweetalert2@11.js"></script>
     <script src="vendor/FontAwesome/FontAwesome.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/script.js"></script>
+    <script src="../../js/panel/shared.js" type="module"></script>
+    <script src="../../js/panel/users.js" type="module"></script>
 </body>
 
 </html>

@@ -46,13 +46,18 @@ const register = () => {
           })
           .catch(err => {
                console.log(err);
-
                if (err.status === 409) {
                     Swal.fire({
                          title: 'نام کاربری یا ایمیل، قبلا استفاده شده',
                          icon: 'error',
                          confirmButtonText: 'اصلاح کن',
                          position: "top-end",
+                    })
+               } else if (err.status === 403) {
+                    Swal.fire({
+                         title: 'این شماره تماس بن شده!',
+                         icon: 'error',
+                         showConfirmButton: false,
                     })
                }
           })
