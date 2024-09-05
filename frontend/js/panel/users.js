@@ -10,6 +10,6 @@ window.addEventListener('load', () => {
           event.preventDefault()
           createNewUsers()
      })
-     
+
      getAndShowAllUsers()
 })

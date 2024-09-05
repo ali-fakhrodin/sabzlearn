@@ -18,7 +18,7 @@ const getAndShowAllUsers = async () => {
      users.forEach((user, index) => {
           usersListWrapperElem.insertAdjacentHTML('beforeend', `
                     <tr>
-                        <td>${index}</td>
+                        <td>${index + 1}</td>
                         <td>${user.name}</td>
                         <td>${user.username}</td>
                         <td>${user.phone}</td>
