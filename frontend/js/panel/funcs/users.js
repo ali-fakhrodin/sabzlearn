@@ -1,7 +1,11 @@
 import { getToken } from '../../funcs/utils.js'
 
+const $ = document
+
 const getAndShowAllUsers = async () => {
      const usersListWrapperElem = document.querySelector('.table tbody')
+
+     usersListWrapperElem.innerHTML = ''
 
      const res = await axios({
           url: `http://localhost:4000/v1/users`,
@@ -13,7 +17,6 @@ const getAndShowAllUsers = async () => {
 
      users.forEach((user, index) => {
           usersListWrapperElem.insertAdjacentHTML('beforeend', `
-               
                     <tr>
                         <td>${index}</td>
                         <td>${user.name}</td>
@@ -32,7 +35,6 @@ const getAndShowAllUsers = async () => {
                         </td>
                     </tr>
                `)
-
      });
 }
 
@@ -94,7 +96,7 @@ const banUser = (userID, userName) => {
                     method: 'put'
                }).then((res) => {
                     console.log(res);
-                    
+
                     if (res.status === 200) {
                          getAndShowAllUsers()
                          Swal.fire({
@@ -115,8 +117,68 @@ const banUser = (userID, userName) => {
 
 }
 
+const createNewUsers = () => {
+     const nameInp = $.querySelector('#login-form__name-input')
+     const usernameInp = $.querySelector('#login-form__username-input')
+     const emailInp = $.querySelector('#login-form__email-input')
+     const phoneNumberInp = $.querySelector('#login-form__tel-input')
+     const passwordInp = $.querySelector('#login-form__password-input')
+
+     const newUserInfos = {
+          name: nameInp.value.trim(),
+          username: usernameInp.value.trim(),
+          email: emailInp.value.trim(),
+          phone: phoneNumberInp.value.trim(),
+          password: passwordInp.value.trim(),
+          confirmPassword: passwordInp.value.trim(),
+     }
+
+     axios({
+          method: 'post',
+          url: 'http://localhost:4000/v1/auth/register',
+          data: newUserInfos
+     })
+          .then((res) => {
+               console.log(res.data)
+               getAndShowAllUsers()
+               if (res.status === 201) {
+                    Swal.fire({
+                         title: 'کاربر جدید با موفقیت ایجاد شد!',
+                         text: `نام کاربری: ${res.data.user.username}`,
+                         icon: 'success',
+                         showConfirmButton: false,
+                         confirmButtonText: 'حله',
+                         position: "top-start",
+                         toast: true,
+                         timer: 1500,
+                         timerProgressBar: true,
+                    })
+               }
+               return res
+          })
+          .catch(err => {
+               console.log(err);
+               if (err.status === 409) {
+                    Swal.fire({
+                         title: 'نام کاربری یا ایمیل، قبلا استفاده شده',
+                         icon: 'error',
+                         confirmButtonText: 'اصلاح کن',
+                         position: "top-end",
+                    })
+               } else if (err.status === 403) {
+                    Swal.fire({
+                         title: 'این شماره تماس بن شده!',
+                         icon: 'error',
+                         showConfirmButton: false,
+                    })
+               }
+          })
+
+}
+
 export {
      getAndShowAllUsers,
      removeUser,
      banUser,
+     createNewUsers,
 }
