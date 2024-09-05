@@ -1,6 +1,5 @@
 import { createNewCategory, getAndShowAllCategories, removeCategory } from "./funcs/categories.js";
 
-
 window.removeCategory = removeCategory
 
 window.addEventListener('load', () => {
@@ -11,9 +10,7 @@ window.addEventListener('load', () => {
      createNewCatBtn.addEventListener('click', e => {
           e.preventDefault()
           createNewCategory()
-
      })
-     
 })
 
 console.log('cat');
