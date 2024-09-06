@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>مقاله ها</title>
     <link rel="stylesheet" href="vendor/FontAwesome/FontAwesome.min.css">
     <link rel="stylesheet" href="vendor/swiperSlider/swiper.css" />
     <link rel="stylesheet" href="vendor/BootStrap/Bootstrap5.min.css">
+    <link rel="stylesheet" href="../../vendor/ck-editor5/ckeditor5.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -54,34 +55,7 @@
                             </div>
                             <div class="home-notification-modal">
                                 <ul class="home-notification-modal-list">
-                                    <li class="home-notification-modal-item">
-                                        <span class="home-notification-modal-text">پیغام ها</span>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </li>
-                                    <li class="home-notification-modal-item">
-                                        <span class="home-notification-modal-text">پیغام ها</span>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </li>
-                                    <li class="home-notification-modal-item">
-                                        <span class="home-notification-modal-text">پیغام ها</span>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </li>
-                                    <li class="home-notification-modal-item">
-                                        <span class="home-notification-modal-text">پیغام ها</span>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </li>
+                                    <!-- Loaded From JS -->
                                 </ul>
                             </div>
                         </div>
@@ -113,28 +87,32 @@
                         <div class="col-6">
                             <div class="name input">
                                 <label class="input-title" style="display: block;">عنوان</label>
-                                <input type="text">
+                                <input type="text" id="title">
                                 <span class="error-message text-danger"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="name input">
                                 <label class="input-title" style="display: block;">لینک</label>
-                                <input type="text">
+                                <input type="text" id="short-name">
                                 <span class="error-message text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="name input">
                                 <label class="input-title" style="display: block;">چکیده</label>
-                                <textarea style="width: 100%;height: 200px;"></textarea>
+                                <textarea style="width: 100%;height: 200px;" id="article-desc"></textarea>
                                 <span class="error-message text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="name input">
                                 <label class="input-title" style="display: block;">محتوای مقاله</label>
-                                <div id="editor"></div>
+                                <div class="editor-container editor-container_classic-editor" id="editor-container">
+                                    <div class="editor-container__editor">
+                                        <div id="editor"></div>
+                                    </div>
+                                </div>
                                 <span class="error-message text-danger"></span>
                             </div>
                         </div>
@@ -146,7 +124,7 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="number input">
+                            <div class="article input mt-4">
                                 <label class="input-title">دسته‌بندی مقاله</label>
                                 <select class="category-list" id="category-list">
                                     <option value="-1">دسته بندی مورد نظر را انتخاب کنید</option>
@@ -157,7 +135,7 @@
                         <div class="col-12">
                             <div class="bottom-form">
                                 <div class="submit-btn">
-                                    <input type="submit" value="افزودن" id="create-article" />
+                                    <input type="submit" value="افزودن" id="create-article-btn" />
                                 </div>
                             </div>
                         </div>
@@ -185,7 +163,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   <!-- Articles Data Loaded From JS -->
+                                    <!-- Articles Data Loaded From JS -->
                                 </tbody>
                             </table>
                         </div>
@@ -193,15 +171,26 @@
                 </div>
             </div>
 
-            
 
         </div>
+
     </div>
 
     <script src="../../vendor/axios/axios.min.js"></script>
+
+    <!-- CK Editor -->
+    <script type="importmap">
+		{
+			"imports": {
+				"ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.1.0/ckeditor5.js",
+				"ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.1.0/"
+			}
+		}
+	</script>
+
+    <script src="../../vendor/switalert/sweetalert2@11.js"></script>
     <script src="vendor/FontAwesome/FontAwesome.min.js"></script>
     <script src="vendor/swiperSlider/swiper.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/script.js"></script>
     <script src="../../js/panel/shared.js" type="module"></script>
