@@ -1,5 +1,6 @@
-import { createNewArticle, getAndShowAllArticles, prepareCreateNewArticle } from './funcs/articles.js';
+import { createNewArticle, getAndShowAllArticles, prepareCreateNewArticle, removeArticle } from './funcs/articles.js';
 
+window.removeArticle = removeArticle
 
 window.addEventListener('load', () => {
      const addNewArticleBtn = document.querySelector('#create-article-btn')

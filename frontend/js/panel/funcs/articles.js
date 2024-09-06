@@ -252,10 +252,7 @@ const prepareCreateNewArticle = async () => {
 
      // Handle Article Body CK Editor
      ClassicEditor.create(document.querySelector('#editor'), editorConfig)
-          .then(editor => {
-               articleBodyEditor = editor
-               console.log(editor);
-          })
+          .then(editor => articleBodyEditor = editor)
 
      // Handle Category
      const res = await axios({ url: `http://localhost:4000/v1/category` })
@@ -294,12 +291,11 @@ const getAndShowAllArticles = async () => {
                              <button type="button" class="btn btn-primary" id="edit-btn">ویرایش</button>
                          </td>
                          <td>
-                             <button type="button" onclick="removeArticle('${article._id}', '${article.name}')" class="btn btn-danger" id="delete-btn">حذف</button>
+                             <button type="button" onclick="removeArticle('${article._id}', '${article.title}')" class="btn btn-danger" id="delete-btn">حذف</button>
                          </td>
                     </tr>
                `)
      });
-
 }
 
 const createNewArticle = async () => {
@@ -323,7 +319,7 @@ const createNewArticle = async () => {
           method: 'post',
           data: formData,
      })
-     
+
      if (res.status === 201) {
           getAndShowAllArticles()
           Swal.fire({
@@ -338,8 +334,46 @@ const createNewArticle = async () => {
      }
 }
 
+const removeArticle = async (articleID, articleTitle) => {
+     console.log(articleID, articleTitle);
+
+     Swal.fire({
+          title: 'از حذف مقاله مطمئنی؟',
+          text: `عنوان مقاله: ${articleTitle}`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'بله',
+          confirmButtonColor: 'red'
+     }).then(res => {
+          if (res.isConfirmed) {
+               axios({
+                    url: `http://localhost:4000/v1/articles/${articleID}`,
+                    method: 'delete',
+                    headers: {
+                         Authorization: `Bearer ${getToken()}`
+                    }
+               }).then(() => {
+                    getAndShowAllArticles()
+                    Swal.fire({
+                         title: 'مقاله با موفقیت حذف شد!',
+                         text: `عنوان مقاله: ${articleTitle}`,
+                         icon: 'success',
+                         showConfirmButton: false,
+                         toast: true,
+                         position: 'top-start',
+                         timer: 3000,
+                         timerProgressBar: true,
+                    })
+               })
+
+          }
+     })
+
+}
+
 export {
      getAndShowAllArticles,
      prepareCreateNewArticle,
-     createNewArticle
+     createNewArticle,
+     removeArticle,
 }
