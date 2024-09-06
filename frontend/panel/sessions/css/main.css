@@ -24,11 +24,7 @@ ul {
 .active-menu {
      position: relative;
      background: #353c50;
-     background: -webkit-gradient(linear,
-               left top,
-               right top,
-               from(#353c50),
-               to(rgba(0, 212, 255, 0)));
+     background: -webkit-gradient(linear, left top, right top, from(#353c50), to(rgba(0, 212, 255, 0)));
      background: linear-gradient(90deg, #353c50 0%, rgba(0, 212, 255, 0) 100%);
 }
 
@@ -44,6 +40,23 @@ ul {
      background-color: #4869ff;
      width: 5px;
      height: 100%;
+}
+
+.notactive-sidebar {
+     -webkit-transition: all 0.2s ease;
+     transition: all 0.2s ease;
+}
+
+.notactive-sidebar #sidebar {
+     width: 16.66666667%;
+     -webkit-transition: all 0.2s ease;
+     transition: all 0.2s ease;
+}
+
+.notactive-sidebar #home {
+     width: 83.33333333%;
+     -webkit-transition: all 0.2s ease;
+     transition: all 0.2s ease;
 }
 
 .notactive-sidebar {
@@ -654,4 +667,8 @@ ul {
 
 .home-content-latset-users .home-content-users-table table tbody tr td .delete-btn {
      font-size: 13px;
+}
+
+.active-modal-notfication {
+     display: block !important;
 }
