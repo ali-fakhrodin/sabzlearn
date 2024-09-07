@@ -25,7 +25,39 @@ const prepareCreateDiscount = async () => {
 }
 
 const createDiscountCode = async () => {
-     console.log(courseID);
+     const discountCode = document.querySelector('#code')
+     const discountPercent = document.querySelector('#percent')
+     const discountMax = document.querySelector('#max')
+
+     const newDiscountInfos = {
+          course: courseID,
+          code: discountCode.value,
+          percent: discountPercent.value,
+          max: discountMax.value,
+     }
+
+     const res = await axios({
+          url: `http://localhost:4000/v1/offs`,
+          method: 'post',
+          headers: {
+               Authorization: `Bearer ${getToken()}`,
+               'Content-Type': 'application/json'
+          },
+          data: JSON.stringify(newDiscountInfos)
+     })
+
+     if (res.status === 201) {
+          getAndShowAllDiscounts()
+          Swal.fire({
+               title: 'کد تخفیف اضافه شد',
+               showConfirmButton: false,
+               timer: 1600,
+               timerProgressBar: true,
+               toast: true,
+               icon: 'success',
+               position: 'top-start'
+          })
+     }
 }
 
 const getAndShowAllDiscounts = async () => {
