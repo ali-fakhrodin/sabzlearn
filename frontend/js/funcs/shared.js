@@ -15,7 +15,7 @@ const ShowUserNameInNavbar = () => {
                     navbarProfileBox.setAttribute('href', './panel/main/')
                } else {
                     navbarProfileBox.insertAdjacentHTML('beforeend', `<span class="main-header__profile-text">${res.name}</span>`)
-                    navbarProfileBox.setAttribute('href', './index.html')
+                    navbarProfileBox.setAttribute('href', './my-account/account')
                }
           })
      } else {

@@ -255,7 +255,6 @@ const updateUser = async () => {
                timer: 1000,
           }).then(() => location.reload())
      }
-
 }
 
 export {
