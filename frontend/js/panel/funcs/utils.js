@@ -11,6 +11,12 @@ const getAdminInfos = async () => {
      return admin.data
 }
 
+const logOut = async () => {
+     localStorage.removeItem('user')
+     return true
+}
+
 export {
      getAdminInfos,
+     logOut,
 }

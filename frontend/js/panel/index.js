@@ -5,7 +5,6 @@ window.addEventListener('load', () => {
 
      getAdminInfos()
           .then(admin => {
-               console.log(admin)
                adminWelcomeNameElem.innerHTML = ` ${admin.name}`
           })
 })

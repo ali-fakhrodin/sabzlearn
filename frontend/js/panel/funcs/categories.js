@@ -93,7 +93,6 @@ const createNewCategory = async () => {
                timer: 1500,
           })
      }
-
 }
 
 export {
