@@ -20,7 +20,6 @@ window.addEventListener('load', () => {
                }
 
                notifIconElem.addEventListener('mouseenter', () => {
-                    console.log('Enter');
                     notifBoxElem.classList.add('active-modal-notfication')
                })
                notifBoxElem.addEventListener('mouseleave', () => {

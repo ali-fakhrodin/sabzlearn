@@ -48,51 +48,72 @@ const getAndShowAllCourses = async () => {
      res.data.slice(0, 6).map(course => {
           coursesContainer.insertAdjacentHTML('beforeend',
                `<div class="col-4">
-          <div class="course-box d-flex flex-xl-column rounded-4 mt-5 overflow-hidden">
-               <a href="./course.html?name=${course.shortName}">
-                    <img src="http://localhost:4000/courses/covers/${course.cover}" alt="fareelancer-image"
-                         class="course-box__img w-100">
-               </a>
+                <div class="course-box d-flex flex-xl-column rounded-4 mt-5 position-relative">
+                     <a href="./course.html?name=${course.shortName}">
+                          <img src="http://localhost:4000/courses/covers/${course.cover}" alt="fareelancer-image"
+                               class="course-box__img w-100 rounded-top-4">
+                     </a>
 
-               <div class="course-box__main px-4">
-                    <a href="./course.html?name=${course.shortName}" class="course-box__title d-block pt-4">
-                         ${course.name}
-                    </a>
-                    <div
-                         class="course-box__rating-teacher d-flex justify-content-between align-items-center py-3">
-                         <div class="course-box__teacher d-flex align-items-center gap-2">
-                              <i class="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
-                              <a href="#" class="course-box__teacher-link">${course.creator}</a>
-                         </div>
-                         <div class="course-box__rating">
-                              ${Array(5 - course.courseAverageScore).fill(0).map(score =>
+                     <div class="course-box__main px-4">
+                          <a href="./course.html?name=${course.shortName}" class="course-box__title d-block pt-4">
+                               ${course.name}
+                          </a>
+                          <div
+                               class="course-box__rating-teacher d-flex justify-content-between align-items-center py-3">
+                               <div class="course-box__teacher d-flex align-items-center gap-2">
+                                    <i class="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
+                                    <a href="#" class="course-box__teacher-link">${course.creator}</a>
+                               </div>
+                               <div class="course-box__rating">
+                                    ${Array(5 - course.courseAverageScore).fill(0).map(score =>
                     `<img src="./images/svgs/star.svg" alt="rating" class="course-box__star"></img>`
                ).join('')
                }
-                              ${Array(course.courseAverageScore).fill(0).map(score =>
+                                    ${Array(course.courseAverageScore).fill(0).map(score =>
                     `<img src="./images/svgs/star_fill.svg" alt="rating" class="course-box__star"></img>`
                ).join('')
                }
-                    </div>
-                    </div>
-                    <div class="course-box_status d-flex justify-content-between">
-                         <div class="course-box__user">
-                              <i class="fas fa-users course-box__users-icon"></i>
-                              <span class="course-box__users-text">${course.registers}</span>
-                         </div>
-                         <span class="course-box__price">${course.price ? course.price.toLocaleString() : 'رایگان'}</span>
-                    </div>
-                    </div>
+                          </div>
+                          </div>
+                          <div class="course-box_status d-flex justify-content-between">
+                               <div class="course-box__user">
+                                    <i class="fas fa-users course-box__users-icon"></i>
+                                    <span class="course-box__users-text">${course.registers}</span>
+                               </div>
 
-                    <div class="course-box__footer mt-3">
-                         <a href="#"
-                              class="course-box__footer-link d-flex align-items-center gap-2 justify-content-center py-3">
-                              مشاهده اطلاعات
-                              <i class="fas fa-arrow-left course-box__footer-icon"></i>
-                         </a>
-                    </div>
-               </div>
-     </div>`
+                              <div class="course-box__price">
+                                   ${course.price ? `
+                                        
+                                        ${course.discount ? `
+                                             <span class="course-box__price courses-box__price-discount">${(course.price - (course.price * course.discount / 100)).toLocaleString()}</span>
+                                             <span class="course-box__price courses-box__undiscount">${course.price.toLocaleString()}</span>
+                                             
+                                        `: `<span class="course-box__price">${course.price.toLocaleString()}</span>`
+                                        }
+                                        
+                                        `: `
+                                        <span span class= "course-box__price courses-box__price-discount" > رایگان</span >
+                                   `}
+                              </div>
+
+
+                          </div>
+                          </div>
+                
+                          <div class="course-box__footer mt-3">
+                               <a href="#"
+                                    class="course-box__footer-link d-flex align-items-center gap-2 justify-content-center py-3">
+                                    مشاهده اطلاعات
+                                    <i class="fas fa-arrow-left course-box__footer-icon"></i>
+                               </a>
+                          </div>
+
+                        ${course.discount ? `
+                            <span class="courses-box__discount">${course.discount}%</span>
+                          ` : ``
+               }
+                </div>
+          </div>`
           )
      })
 
@@ -504,12 +525,11 @@ const getCourseDetails = () => {
                courseTitleElem.innerHTML = data.name
                courseDescElem.innerHTML = data.description
 
-
                if (data.isUserRegisteredToThisCourse) {
-                    courseregisterInfoElem.innerHTML ='<span>مشاهده دوره</span>'
+                    courseregisterInfoElem.innerHTML = '<span>مشاهده دوره</span>'
                } else {
                     courseregisterInfoElem.innerHTML = '<span>ثبت نام در دوره</span>'
-                    
+
                     courseregisterInfoElem.addEventListener('click', () => {
                          if (data.price === 0) {
                               Swal.fire({
@@ -542,13 +562,115 @@ const getCourseDetails = () => {
                                         })
                                    }
                               })
-                              console.log('pr');
                          } else {
-                              console.log('Not Free');
+                              Swal.fire({
+                                   title: "می خواهید در دوره ثبت نام شوید؟",
+                                   showCancelButton: true,
+                                   cancelButtonText: 'خیر',
+                                   confirmButtonText: 'بله',
+                              }).then((res) => {
+                                   if (res.isConfirmed) {
+                                        Swal.fire({
+                                             title: "کد تخفیف داری؟",
+                                             showCancelButton: true,
+                                             cancelButtonText: 'خیر',
+                                             confirmButtonText: 'بله',
+                                        }).then(res => {
+                                             if (res.isConfirmed) {
+                                                  Swal.fire({
+                                                       title: "کد تخفیف رو وارد کن",
+                                                       input: 'text',
+                                                       confirmButtonText: "اعمال تخفیف",
+                                                       showCancelButton: true,
+                                                       cancelButtonText: "لغو",
+                                                  }).then(code => {
+                                                       if (code.isConfirmed) {
+                                                            axios({
+                                                                 url: `http://localhost:4000/v1/offs/${code.value}`,
+                                                                 method: 'post',
+                                                                 headers: {
+                                                                      Authorization: `Bearer ${getToken()}`,
+                                                                      'Content-Type': 'application/json'
+                                                                 },
+                                                                 data: JSON.stringify({ course: data._id })
+                                                            }).then(discount => {
+                                                                 const percent = Number(discount.data.percent) / 100;
+                                                                 axios({
+                                                                      url: `http://localhost:4000/v1/courses/${data._id}/register`,
+                                                                      method: 'post',
+                                                                      headers: {
+                                                                           Authorization: `Bearer ${getToken()}`,
+                                                                           'Content-Type': 'application/json'
+                                                                      },
+                                                                      data: JSON.stringify({ price: (data.price) * percent })
+                                                                 }).then(res => {
+                                                                      if (res.status === 201) {
+                                                                           Swal.fire({
+                                                                                title: 'ثبت نام شدی',
+                                                                                timer: 2000,
+                                                                                showConfirmButton: false,
+                                                                                timerProgressBar: true,
+                                                                                toast: true,
+                                                                                icon: 'success',
+                                                                                position: 'top-start'
+                                                                           }).then(() => location.reload())
+                                                                      }
+                                                                 })
+                                                            }).catch(err => {
+                                                                 if (err.status === 404) {
+                                                                      Swal.fire({
+                                                                           title: 'کد معتبر نیست!',
+                                                                           timer: 2000,
+                                                                           showConfirmButton: false,
+                                                                           timerProgressBar: true,
+                                                                           toast: true,
+                                                                           icon: 'warning',
+                                                                           position: 'top-start'
+                                                                      })
+                                                                 } else if (err.status === 409) {
+                                                                      Swal.fire({
+                                                                           title: 'کد قبلاً استفاده شده!',
+                                                                           timer: 2000,
+                                                                           showConfirmButton: false,
+                                                                           timerProgressBar: true,
+                                                                           toast: true,
+                                                                           icon: 'warning',
+                                                                           position: 'top-start'
+                                                                      })
+                                                                 }
+                                                            })
+                                                       }
+                                                  })
+                                             } else {
+                                                  axios({
+                                                       url: `http://localhost:4000/v1/courses/${data._id}/register`,
+                                                       method: 'post',
+                                                       headers: {
+                                                            Authorization: `Bearer ${getToken()}`,
+                                                            'Content-Type': 'application/json'
+                                                       },
+                                                       data: JSON.stringify({ price: data.price })
+                                                  }).then(result => {
+                                                       if (result.status === 201) {
+                                                            Swal.fire({
+                                                                 title: 'ثبت نام شدی!',
+                                                                 timer: 2000,
+                                                                 showConfirmButton: false,
+                                                                 timerProgressBar: true,
+                                                                 toast: true,
+                                                                 icon: 'success',
+                                                                 position: 'top-start'
+                                                            }).then(() => location.reload())
+                                                       }
+                                                  })
+                                             }
+                                        })
+                                   }
+                              })
                          }
                     })
                }
-               
+
                courseStatusElem.innerHTML = data.isComplete ? 'تکمیل شده' : 'در حال برگذاری'
                courseSupportElem.innerHTML = data.support
                courseLastUpdataElem.innerHTML = data.updatedAt.slice(0, 10)
@@ -696,7 +818,6 @@ const getCourseDetails = () => {
                courseTimeElem.innerHTML = `${sessionsHTime}:${sessionsMTime}`
 
           })
-
 }
 
 const getAndShowRelatedCourses = () => {
