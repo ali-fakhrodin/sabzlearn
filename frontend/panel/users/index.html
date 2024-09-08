@@ -55,34 +55,7 @@
                             </div>
                             <div class="home-notification-modal">
                                 <ul class="home-notification-modal-list">
-                                    <li class="home-notification-modal-item">
-                                        <span class="home-notification-modal-text">پیغام ها</span>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </li>
-                                    <li class="home-notification-modal-item">
-                                        <span class="home-notification-modal-text">پیغام ها</span>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </li>
-                                    <li class="home-notification-modal-item">
-                                        <span class="home-notification-modal-text">پیغام ها</span>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </li>
-                                    <li class="home-notification-modal-item">
-                                        <span class="home-notification-modal-text">پیغام ها</span>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </li>
+                                    <!-- From JS -->
                                 </ul>
                             </div>
                         </div>
@@ -130,15 +103,15 @@
                             <div class="col-6">
                                 <div class="email input">
                                     <label class="input-title">ایمیل</label>
-                                    <input type="text" isValid="false" id="login-form__email-input"
-                                        placeholder="لطفا ایمیل کاربر را وارد کنید...">
+                                    <input type="email" isValid="false" id="login-form__email-input"
+                                        placeholder="لطفا ایمیل کاربر را وارد کنید..." >
                                     <span class="error-message text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="password input">
                                     <label class="input-title">رمز عبور</label>
-                                    <input type="password" isValid="false" id="login-form__password-input"
+                                    <input type="password" isValid="false" autocomplete="current-password" id="login-form__password-input"
                                         placeholder="لطفا رمز عبور کاربر را وارد کنید...">
                                     <span class="error-message text-danger"></span>
                                 </div>
@@ -174,6 +147,7 @@
                                         <th>شماره</th>
                                         <th>ایمیل</th>
                                         <th>نقش</th>
+                                        <th>تغییر نقش</th>
                                         <th>ویرایش</th>
                                         <th>حذف</th>
                                         <th>بن</th>

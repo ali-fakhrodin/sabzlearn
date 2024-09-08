@@ -1,5 +1,6 @@
-import { getAndShowAllUsers, removeUser, banUser, createNewUsers } from "./funcs/users.js";
+import { getAndShowAllUsers, removeUser, banUser, createNewUsers, changeRole } from "./funcs/users.js";
 
+window.changeRole = changeRole
 window.removeUser = removeUser
 window.banUser = banUser
 

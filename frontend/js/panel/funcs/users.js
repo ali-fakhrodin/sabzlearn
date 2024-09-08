@@ -28,6 +28,9 @@ const getAndShowAllUsers = async () => {
                             <button type='button' class='btn btn-primary edit-btn'>ویرایش</button>
                         </td>
                         <td>
+                            <button type='button' class='btn btn-primary edit-btn' onclick="changeRole('${user._id}', '${user.name}')">تغییر</button>
+                        </td>
+                        <td>
                             <button type='button' class='btn btn-danger delete-btn' onclick="removeUser('${user._id}', '${user.name}')">حذف</button>
                         </td>
                         <td>
@@ -176,9 +179,53 @@ const createNewUsers = () => {
 
 }
 
+const changeRole = async (userID, userName) => {
+     Swal.fire({
+          title: `از تغییر رول ${userName} مطمئنی؟`,
+          text: `رول مورد نظر را بنویس (ADMIN | USER)`,
+          icon: 'warning',
+          input: 'text',
+          showCancelButton: true,
+          cancelButtonText: 'خیر',
+          confirmButtonText: 'بله'
+     }).then(async result => {
+          if (result.isConfirmed) {
+               const newRole = result.value
+
+               const userNewRoleInfos = {
+                    role: newRole,
+                    id: userID,
+               }
+               const res = await axios({
+                    url: `http://localhost:4000/v1/users/role`,
+                    method: "put",
+                    headers: {
+                         Authorization: `Bearer ${getToken()}`,
+                         "Content-Type": "application/json"
+                    },
+                    data: JSON.stringify(userNewRoleInfos)
+               })
+
+               if (res.status === 200) {
+                    getAndShowAllUsers()
+                    Swal.fire({
+                         title: `رول ${userName} به ${newRole} تغییر کرد`,
+                         icon: 'success',
+                         toast: true,
+                         position: 'top-start',
+                         showConfirmButton: false,
+                         timer: 1500,
+                    })
+               }
+
+          }
+     })
+}
+
 export {
      getAndShowAllUsers,
      removeUser,
      banUser,
      createNewUsers,
+     changeRole,
 }
