@@ -222,10 +222,47 @@ const changeRole = async (userID, userName) => {
      })
 }
 
+const updateUser = async () => {
+     const nameInp = document.querySelector('#name')
+     const usernameInp = document.querySelector('#username')
+     const emailInp = document.querySelector('#email')
+     const telInp = document.querySelector('#tel')
+     const passwordInp = document.querySelector('#password')
+
+     const userNewInfos = {
+          name: nameInp.value.trim(),
+          username: usernameInp.value.trim(),
+          email: emailInp.value.trim(),
+          phone: telInp.value.trim(),
+          password: passwordInp.value.trim(),
+     }
+
+     const res = await axios({
+          url: `http://localhost:4000/v1/users`,
+          method: 'put',
+          headers: {
+               Authorization: `Bearer ${getToken()}`,
+               "Content-Type": "application/json"
+          },
+          data: JSON.stringify(userNewInfos)
+     })
+
+     if (res.status === 200) {
+          Swal.fire({
+               title: "ویرایش شد",
+               showConfirmButton: false,
+               icon: "success",
+               timer: 1000,
+          }).then(() => location.reload())
+     }
+
+}
+
 export {
      getAndShowAllUsers,
      removeUser,
      banUser,
      createNewUsers,
      changeRole,
+     updateUser,
 }

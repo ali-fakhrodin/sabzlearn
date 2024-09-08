@@ -78,9 +78,7 @@ const answerComment = async (commentID) => {
           cancelButtonText: "لغو",
      }).then(res => {
           if (res.isConfirmed) {
-               const data = {
-                    body: res.value,
-               }
+               const data = { body: res.value, score: Number(5) }
 
                axios({
                     url: `http://localhost:4000/v1/comments/answer/${commentID}`,
