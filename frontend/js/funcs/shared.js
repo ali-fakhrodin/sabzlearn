@@ -503,7 +503,52 @@ const getCourseDetails = () => {
                courseCatElem.innerHTML = data.categoryID.title
                courseTitleElem.innerHTML = data.name
                courseDescElem.innerHTML = data.description
-               courseregisterInfoElem.innerHTML = data.isUserRegisteredToThisCours ? 'مشاهده دوره' : 'ثبت نام در دوره'
+
+
+               if (data.isUserRegisteredToThisCourse) {
+                    courseregisterInfoElem.innerHTML ='<span>مشاهده دوره</span>'
+               } else {
+                    courseregisterInfoElem.innerHTML = '<span>ثبت نام در دوره</span>'
+                    
+                    courseregisterInfoElem.addEventListener('click', () => {
+                         if (data.price === 0) {
+                              Swal.fire({
+                                   title: "می خواهید در دوره ثبت نام شوید؟",
+                                   showCancelButton: true,
+                                   cancelButtonText: 'خیر',
+                                   confirmButtonText: 'بله',
+                              }).then(res => {
+                                   if (res.isConfirmed) {
+                                        axios({
+                                             url: `http://localhost:4000/v1/courses/${data._id}/register`,
+                                             method: 'post',
+                                             headers: {
+                                                  Authorization: `Bearer ${getToken()}`,
+                                                  'Content-Type': 'application/json'
+                                             },
+                                             data: JSON.stringify({ price: 0 })
+                                        }).then(result => {
+                                             if (result.status === 201) {
+                                                  Swal.fire({
+                                                       title: 'ثبت نام شدی!',
+                                                       timer: 2000,
+                                                       showConfirmButton: false,
+                                                       timerProgressBar: true,
+                                                       toast: true,
+                                                       icon: 'success',
+                                                       position: 'top-start'
+                                                  }).then(() => location.reload())
+                                             }
+                                        })
+                                   }
+                              })
+                              console.log('pr');
+                         } else {
+                              console.log('Not Free');
+                         }
+                    })
+               }
+               
                courseStatusElem.innerHTML = data.isComplete ? 'تکمیل شده' : 'در حال برگذاری'
                courseSupportElem.innerHTML = data.support
                courseLastUpdataElem.innerHTML = data.updatedAt.slice(0, 10)
