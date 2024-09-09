@@ -111,18 +111,18 @@
                         <div class="ticket">
                             <div class="ticket-header">
                                 <span class="ticket-header__title">ارسال تیکت جدید</span>
-                                <a class="ticket-header__link" href="#">همه تیکت ها</a>
+                                <a class="ticket-header__link" href="../Tickets/index.html">همه تیکت ها</a>
                             </div>
                             <form class="ticket-form" action="#">
                                 <div class="row">
                                     <div class="col-6">
                                         <label class="ticket-form__label">دپارتمان را انتخاب کنید:</label>
                                         <select class="ticket-form__select">
-                                            <option class="ticket-form__option">لطفا یک مورد را انتخاب نمایید.</option>
-                                            <option class="ticket-form__option">پشتیبانی</option>
-                                            <option class="ticket-form__option">مشاوره</option>
-                                            <option class="ticket-form__option">مالی</option>
-                                            <option class="ticket-form__option">ارتباط با مدیریت</option>
+                                            <option class="ticket-form__option" value="ignore">لطفا یک مورد را انتخاب نمایید.</option>
+                                            <option class="ticket-form__option" value="ignore">پشتیبانی</option>
+                                            <option class="ticket-form__option" value="ignore">مشاوره</option>
+                                            <option class="ticket-form__option" value="ignore">مالی</option>
+                                            <option class="ticket-form__option" value="ignore">ارتباط با مدیریت</option>
                                         </select>
                                     </div>
                                     <div class="col-6">
@@ -260,6 +260,7 @@
     <script src="vendor/FontAwesome5/font_awesome.js"></script>
     <script src="../../js/shared.js" type="module"></script>
     <script src="../../js/account/shared.js" type="module"></script>
+    <script src="../../js/account/send-ticket.js" type="module"></script>
 </body>
 
 </html>
