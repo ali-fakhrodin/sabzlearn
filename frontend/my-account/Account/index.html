@@ -82,7 +82,7 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="sidebar">
-                            <span class="sidebar__name">محمدامین سعیدی راد</span>
+                            <span class="sidebar__name"></span>
                             <ul class="sidebar__list">
                                 <li class="sidebar__item">
                                     <a class="sidebar__link" href="#">پیشخوان</a>
@@ -97,7 +97,7 @@
                                     <a class="sidebar__link" href="../Edit/index.html">جزئیات حساب کاربری</a>
                                 </li>
                                 <li class="sidebar__item">
-                                    <a class="sidebar__link" href="#">دوره های خریداری شده</a>
+                                    <a class="sidebar__link" href="../Buyed/index.html">دوره های خریداری شده</a>
                                 </li>
                                 <li class="sidebar__item">
                                     <a class="sidebar__link" href="#">تیکت های پشتیبانی</a>
@@ -223,9 +223,16 @@
     <script src="../../vendor/axios/axios.min.js"></script>
     <script src="../../vendor/switalert/sweetalert2@11.js"></script>
     <script src="vendor/FontAwesome5/font_awesome.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../js/shared.js" type="module"></script>
     <script src="../../js/account/shared.js" type="module"></script>
+
+    <script type="module">
+        import { getMe } from '../../js/funcs/auth.js'
+
+        getMe().then(res => {
+            document.querySelector('.sidebar__name').innerHTML = `<span class="main-header__profile-text">${res.name}</span>`
+        })
+    </script>
 
 </body>
 
